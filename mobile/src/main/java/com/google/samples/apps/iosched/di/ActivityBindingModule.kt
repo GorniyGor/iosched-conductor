@@ -76,10 +76,10 @@ abstract class ActivityBindingModule {
             // fragments
             AgendaModule::class,
             CodelabsModule::class,
-            FeedModule::class,
+//            FeedModule::class,
             InfoModule::class,
             MapModule::class,
-            ScheduleModule::class,
+//            ScheduleModule::class,
             SearchModule::class,
             SessionDetailModule::class,
             SettingsModule::class,

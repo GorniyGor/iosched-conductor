@@ -195,6 +195,11 @@ dependencies {
     implementation "com.google.code.gson:gson:$gsonVersion"
 
     implementation "com.google.ar:core:$rootProject.arcoreVersion"
+
+    implementation 'com.bluelinelabs:conductor:3.0.0-rc5'
+    implementation 'com.bluelinelabs:conductor-archlifecycle:3.0.0-rc5'
+    implementation "android.arch.lifecycle:reactivestreams:1.1.0"
+    implementation "io.reactivex.rxjava3:rxjava:3.0.3"
 }
 
 apply plugin: 'com.google.gms.google-services'

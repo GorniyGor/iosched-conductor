@@ -34,6 +34,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bluelinelabs.conductor.Conductor
+import com.bluelinelabs.conductor.Router
+import com.bluelinelabs.conductor.RouterTransaction
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.samples.apps.iosched.R
@@ -47,7 +50,9 @@ import com.google.samples.apps.iosched.shared.di.MapFeatureEnabledFlag
 import com.google.samples.apps.iosched.shared.domain.ar.ArConstants
 import com.google.samples.apps.iosched.shared.result.EventObserver
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
+import com.google.samples.apps.iosched.ui.feed.FeedFragment
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
+import com.google.samples.apps.iosched.ui.schedule.ScheduleFragment
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.signin.SignOutDialogFragment
 import com.google.samples.apps.iosched.util.HeightTopWindowInsetsListener
@@ -59,6 +64,7 @@ import com.google.samples.apps.iosched.util.signin.FirebaseAuthErrorCodeConverte
 import com.google.samples.apps.iosched.util.updateForTheme
 import com.google.samples.apps.iosched.widget.HashtagIoDecoration
 import com.google.samples.apps.iosched.widget.NavigationBarContentFrameLayout
+import com.google.samples.apps.iosched.widget.navigation.ConductorNavHost
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import java.util.UUID
@@ -120,7 +126,7 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
     private lateinit var navigation: NavigationView
     private lateinit var navHeaderBinding: NavigationHeaderBinding
     private lateinit var navController: NavController
-    private var navHostFragment: NavHostFragment? = null
+    private var navHostFragment: ConductorNavHost? = null
 
     private lateinit var statusScrim: View
 
@@ -172,11 +178,8 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         navHeaderBinding = NavigationHeaderBinding.inflate(layoutInflater).apply {
             lifecycleOwner = this@MainActivity
         }
-
-        navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-
-        navController = findNavController(R.id.nav_host_fragment)
+        navHostFragment = ConductorNavHost(this, findViewById(R.id.view_container), savedInstanceState)
+        navController = findNavController(R.id.view_container)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             currentNavId = destination.id
             val isTopLevelDestination = TOP_LEVEL_DESTINATIONS.contains(destination.id)
@@ -308,14 +311,14 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
 
     override fun onUserInteraction() {
         super.onUserInteraction()
-        getCurrentFragment()?.onUserInteraction()
+//        getCurrentFragment()?.onUserInteraction()
     }
 
-    private fun getCurrentFragment(): MainNavigationFragment? {
-        return navHostFragment
-            ?.childFragmentManager
-            ?.primaryNavigationFragment as? MainNavigationFragment
-    }
+//    private fun getCurrentFragment(): MainNavigationFragment? {
+//        return navHostFragment
+//            ?.childFragmentManager
+//            ?.primaryNavigationFragment as? MainNavigationFragment
+//    }
 
     private fun navigateTo(navId: Int) {
         if (navId == currentNavId) {

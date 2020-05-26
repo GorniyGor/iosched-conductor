@@ -23,20 +23,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.view.updatePaddingRelative
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.common.collect.ImmutableMap
+import com.google.samples.apps.iosched.MainApplication
+import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentFeedBinding
 import com.google.samples.apps.iosched.model.Moment
 import com.google.samples.apps.iosched.model.SessionId
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsHelper
 import com.google.samples.apps.iosched.shared.result.EventObserver
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
+import com.google.samples.apps.iosched.shared.util.requireActivity
+import com.google.samples.apps.iosched.shared.util.requireContext
 import com.google.samples.apps.iosched.shared.util.toEpochMilli
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.feed.FeedFragmentDirections.Companion.toMap
 import com.google.samples.apps.iosched.ui.feed.FeedFragmentDirections.Companion.toSchedule
 import com.google.samples.apps.iosched.ui.feed.FeedFragmentDirections.Companion.toSessionDetail
@@ -45,11 +50,12 @@ import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.signin.setupProfileMenuItem
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.openWebsiteUrl
 import timber.log.Timber
 import javax.inject.Inject
 
-class FeedFragment : MainNavigationFragment() {
+class FeedFragment : MainNavigationController()  {
 
     companion object {
         private const val DIALOG_NEED_TO_SIGN_IN = "dialog_need_to_sign_in"
@@ -69,23 +75,8 @@ class FeedFragment : MainNavigationFragment() {
     private lateinit var binding: FragmentFeedBinding
     private var adapter: FeedAdapter? = null
     private lateinit var sessionsViewBinder: FeedSessionsViewBinder
+    private val viewLifecycleOwner: LifecycleOwner = this
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        model = viewModelProvider(viewModelFactory)
-
-        binding = FragmentFeedBinding.inflate(
-            inflater, container, false
-        ).apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = model
-        }
-
-        return binding.root
-    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         if (::sessionsViewBinder.isInitialized) {
@@ -97,8 +88,22 @@ class FeedFragment : MainNavigationFragment() {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
+        val appComponent = (inflater.context.applicationContext as MainApplication).appComponent
+        appComponent.getControllerComponent().inject(this)
+        return inflater.inflate(R.layout.fragment_feed, container, false)
+    }
+
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
+        //FROM onCreate--------------------
+        model = viewModelProvider(viewModelFactory)
+
+        binding = FragmentFeedBinding.bind(view).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = model
+        }
+
+        //FROM onCreateView----------------
         analyticsHelper.sendScreenView("Home", requireActivity())
 
         binding.toolbar.setupProfileMenuItem(activityViewModelProvider(viewModelFactory), this)
@@ -129,12 +134,12 @@ class FeedFragment : MainNavigationFragment() {
             v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
         }
 
-        setUpSnackbar(model.snackBarMessage, binding.snackbar, snackbarMessageManager)
+        setUpSnackbar(model.snackBarMessage, binding.snackbar, snackbarMessageManager, context = view.context)
 
         model.errorMessage.observe(this, Observer { message ->
             val errorMessage = message?.getContentIfNotHandled()
             if (!errorMessage.isNullOrEmpty()) {
-                Toast.makeText(this.context, errorMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, errorMessage, Toast.LENGTH_SHORT).show()
                 Timber.e(errorMessage)
             }
         })

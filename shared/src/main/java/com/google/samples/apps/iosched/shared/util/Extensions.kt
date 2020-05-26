@@ -16,11 +16,13 @@
 
 package com.google.samples.apps.iosched.shared.util
 
+import android.content.Context
 import android.os.Parcel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.ParcelCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -33,6 +35,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.google.samples.apps.iosched.shared.BuildConfig
+import com.bluelinelabs.conductor.Controller
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 
@@ -84,6 +87,11 @@ inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
 ) =
     ViewModelProviders.of(this, provider).get(VM::class.java)
 
+inline fun <reified VM : ViewModel> Controller.viewModelProvider(
+    provider: ViewModelProvider.Factory
+) =
+    ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
+
 /**
  * Like [Fragment.viewModelProvider] for Fragments that want a [ViewModel] scoped to the Activity.
  */
@@ -91,6 +99,20 @@ inline fun <reified VM : ViewModel> Fragment.activityViewModelProvider(
     provider: ViewModelProvider.Factory
 ) =
     ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
+
+inline fun <reified VM : ViewModel> Controller.activityViewModelProvider(
+    provider: ViewModelProvider.Factory
+) =
+    ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
+
+fun Controller.requireActivity(): AppCompatActivity {
+    return this.activity as AppCompatActivity?
+        ?: throw IllegalStateException("Controller $this not attached to an activity.")
+}
+
+fun Controller.requireContext(): Context {
+    return this.view?.context ?: throw IllegalStateException("Controller $this not attached to a context.")
+}
 
 /**
  * Like [Fragment.viewModelProvider] for Fragments that want a [ViewModel] scoped to the parent
@@ -100,6 +122,11 @@ inline fun <reified VM : ViewModel> Fragment.parentViewModelProvider(
     provider: ViewModelProvider.Factory
 ) =
     ViewModelProviders.of(parentFragment!!, provider).get(VM::class.java)
+
+inline fun <reified VM : ViewModel> Controller.parentViewModelProvider(
+    provider: ViewModelProvider.Factory
+) =
+    ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
 
 // endregion
 // region Parcelables, Bundles

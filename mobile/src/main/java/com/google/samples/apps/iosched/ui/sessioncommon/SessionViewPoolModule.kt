@@ -29,12 +29,12 @@ import javax.inject.Named
 @Module
 internal class SessionViewPoolModule {
 
-    @FragmentScoped
+//    @FragmentScoped
     @Provides
     @Named("sessionViewPool")
     fun providesSessionViewPool(): RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
 
-    @FragmentScoped
+//    @FragmentScoped
     @Provides
     @Named("tagViewPool")
     fun providesTagViewPool(): RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()

@@ -43,6 +43,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.bluelinelabs.conductor.Controller
 import com.google.samples.apps.iosched.model.Theme
 import dagger.android.support.DaggerFragment
 
@@ -314,3 +317,6 @@ fun <T> MutableCollection<T>.compatRemoveIf(predicate: (T) -> Boolean): Boolean 
     }
     return removed
 }
+
+
+fun Controller.findNavController(): NavController = Navigation.findNavController(view!!)

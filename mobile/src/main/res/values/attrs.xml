@@ -124,4 +124,9 @@
         <attr name="android:drawable" />
         <attr name="margin" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="ConductorNavigator">
+        <attr name="layout" format="reference" />
+        <attr name="android:name" />
+    </declare-styleable>
 </resources>

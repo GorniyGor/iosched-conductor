@@ -145,6 +145,8 @@ dependencies {
 
     // unit tests livedata
     testImplementation "androidx.arch.core:core-testing:$rootProject.archTestingVersion"
+
+    implementation 'com.bluelinelabs:conductor:3.0.0-rc5'
 }
 
 apply plugin: 'com.google.gms.google-services'
