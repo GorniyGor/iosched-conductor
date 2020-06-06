@@ -35,7 +35,7 @@ internal abstract class InfoModule {
      * Generates an [AndroidInjector] for the [InfoFragment].
      */
     @FragmentScoped
-    @ContributesAndroidInjector(modules = [InfoFragmentsModule::class])
+    @ContributesAndroidInjector/*(modules = [InfoFragmentsModule::class])*/
     internal abstract fun contributeInfoFragment(): InfoFragment
 
     /**

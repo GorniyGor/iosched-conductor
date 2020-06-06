@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.iosched.ui.search
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.ContextThemeWrapper
@@ -26,31 +27,28 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.core.view.updatePadding
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.samples.apps.iosched.R.style
 import com.google.samples.apps.iosched.databinding.FragmentSearchBinding
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsHelper
 import com.google.samples.apps.iosched.shared.result.EventObserver
+import com.google.samples.apps.iosched.shared.util.requireActivity
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.search.SearchFragmentDirections.Companion.toSessionDetail
 import com.google.samples.apps.iosched.ui.search.SearchFragmentDirections.Companion.toSpeakerDetail
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.openWebsiteUrl
 import kotlinx.android.synthetic.main.fragment_search.view.searchView
 import javax.inject.Inject
 
-class SearchFragment : MainNavigationFragment() {
+class SearchFragment : MainNavigationController() {
     @Inject lateinit var analyticsHelper: AnalyticsHelper
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var binding: FragmentSearchBinding
     private lateinit var viewModel: SearchViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         val themedInflater =
             inflater.cloneInContext(ContextThemeWrapper(requireActivity(), style.AppTheme_Detail))
         binding = FragmentSearchBinding.inflate(themedInflater, container, false).apply {
@@ -59,8 +57,8 @@ class SearchFragment : MainNavigationFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
+        //from onActivityCreated
         viewModel = viewModelProvider(viewModelFactory)
         binding.viewModel = viewModel
 
@@ -74,11 +72,7 @@ class SearchFragment : MainNavigationFragment() {
             openWebsiteUrl(requireActivity(), url)
         })
         analyticsHelper.sendScreenView("Search", requireActivity())
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+        // from onViewCreated
         binding.toolbar.searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
@@ -105,9 +99,9 @@ class SearchFragment : MainNavigationFragment() {
         }
     }
 
-    override fun onPause() {
+    override fun onActivityPaused(activity: Activity) {
         dismissKeyboard(binding.toolbar.searchView)
-        super.onPause()
+        super.onActivityPaused(activity)
     }
 
     private fun showKeyboard(view: View) {

@@ -98,9 +98,6 @@ class ScheduleFilterFragment : MainNavigationController() {
     private val contentFadeInterpolator = LinearOutSlowInInterpolator()
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
-        val appComponent = (inflater.context.applicationContext as MainApplication).appComponent
-        appComponent.getControllerComponent().inject(this)
-
         behavior = BottomSheetBehavior.from(container)
         // Update the peek and margins so that it scrolls and rests within sys ui
         val peekHeight = behavior.peekHeight

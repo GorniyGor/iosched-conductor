@@ -21,20 +21,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePaddingRelative
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.bluelinelabs.conductor.Controller
+import com.bluelinelabs.conductor.Router
+import com.bluelinelabs.conductor.RouterTransaction
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentInfoBinding
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsHelper
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.shared.util.requireActivity
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.signin.setupProfileMenuItem
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.widget.conductor.RouterPagerAdapter
 import javax.inject.Inject
 
-class InfoFragment : MainNavigationFragment() {
+class InfoFragment : MainNavigationController() {
 
     @Inject lateinit var analyticsHelper: AnalyticsHelper
 
@@ -42,29 +45,24 @@ class InfoFragment : MainNavigationFragment() {
 
     private lateinit var binding: FragmentInfoBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         binding = FragmentInfoBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
-        }
-        binding.viewpager.doOnApplyWindowInsets { v, insets, padding ->
-            v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
         }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
+        binding.viewpager.doOnApplyWindowInsets { v, insets, padding ->
+            v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
+        }
         binding.run {
             toolbar.setupProfileMenuItem(
                 activityViewModelProvider(viewModelFactory), this@InfoFragment
             )
 
             viewpager.offscreenPageLimit = INFO_PAGES.size
-            viewpager.adapter = InfoAdapter(childFragmentManager)
+            viewpager.adapter = InfoAdapter(this@InfoFragment)
             tabs.setupWithViewPager(binding.viewpager)
 
             // Analytics. Manually fire once for the loaded tab, then fire on tab change.
@@ -80,21 +78,26 @@ class InfoFragment : MainNavigationFragment() {
     }
 
     private fun trackInfoScreenView(position: Int) {
-        val pageName = getString(INFO_TITLES[position])
+        val pageName = resources?.getString(INFO_TITLES[position])
         analyticsHelper.sendScreenView("Info - $pageName", requireActivity())
     }
 
     /**
      * Adapter that builds a page for each info screen.
      */
-    inner class InfoAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    inner class InfoAdapter(host: Controller) : RouterPagerAdapter(host) {
 
         override fun getCount() = INFO_PAGES.size
 
-        override fun getItem(position: Int) = INFO_PAGES[position]()
+        override fun configureRouter(router: Router, position: Int) {
+            if (!router.hasRootController()) {
+                val page: Controller = INFO_PAGES[position]()
+                router.setRoot(RouterTransaction.with(page))
+            }
+        }
 
         override fun getPageTitle(position: Int): CharSequence {
-            return resources.getString(INFO_TITLES[position])
+            return resources?.getString(INFO_TITLES[position]) ?: ""
         }
     }
 

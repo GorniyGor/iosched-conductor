@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.iosched.widget.navigation
+package com.google.samples.apps.iosched.widget.conductor
 
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.navigation.NavController
@@ -30,35 +29,37 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.Navigator
 import androidx.navigation.NavigatorProvider
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.plusAssign
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.bluelinelabs.conductor.RouterTransaction.Companion
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.R.styleable
+import com.google.samples.apps.iosched.widget.conductor.ConductorNavigator.Destination
 
 class ConductorNavHost(
     private val activity: Activity,
     private val view: ViewGroup,
     private val savedInstanceState: Bundle?) : NavHost {
+    val router: Router
 
     private val navigationController =
         NavController(view.context).apply {
-//            val rootView = if (view.parent != null) view.parent as View else view
-            val router = Conductor.attachRouter(activity, view, savedInstanceState)
+            //TODO( somehow in Fragment realisation is used view.parent )
+            /*val rootView = if (view.parent != null) view.parent as View else view*/
+            router = Conductor.attachRouter(activity, view, savedInstanceState)
             Navigation.setViewNavController(view, this)
-            navigatorProvider += ConductorNavigator(router)
-            setGraph(R.navigation.nav_graphc)
+            navigatorProvider += ConductorNavigator(
+                router)
+            setGraph(R.navigation.nav_graph)
         }
 
     override fun getNavController(): NavController = navigationController
 }
 
 @Navigator.Name("conductor_controller")
-class ConductorNavigator(private val router: Router): Navigator<ConductorNavigator.Destination>() {
+class ConductorNavigator(private val router: Router): Navigator<Destination>() {
 
     override fun navigate(
         destination: Destination,
@@ -73,14 +74,16 @@ class ConductorNavigator(private val router: Router): Navigator<ConductorNavigat
         return destination
     }
 
-    override fun createDestination(): Destination = Destination(this)
+    override fun createDestination(): Destination = Destination(
+        this)
 
     override fun popBackStack(): Boolean = router.handleBack()
 
     @NavDestination.ClassType(Controller::class)
     class Destination: NavDestination {
         constructor(navigatorProvider: NavigatorProvider) :
-            this(navigatorProvider.getNavigator(ConductorNavigator::class.java))
+            this(navigatorProvider.getNavigator(
+                ConductorNavigator::class.java))
         constructor(navigator: Navigator<out Destination?>) : super(navigator)
 
         private var mClassName: String? = null

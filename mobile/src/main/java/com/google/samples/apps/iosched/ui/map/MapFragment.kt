@@ -17,6 +17,7 @@
 package com.google.samples.apps.iosched.ui.map
 
 import android.Manifest
+import android.app.Activity
 import android.app.Dialog
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -25,7 +26,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import androidx.activity.addCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -43,8 +43,10 @@ import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentMapBinding
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsHelper
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
+import com.google.samples.apps.iosched.shared.util.requireActivity
+import com.google.samples.apps.iosched.shared.util.requireFragmentManager
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.signin.setupProfileMenuItem
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
 import com.google.samples.apps.iosched.util.slideOffsetToAlpha
@@ -53,7 +55,7 @@ import com.google.samples.apps.iosched.widget.BottomSheetBehavior.BottomSheetCal
 import org.threeten.bp.Instant
 import javax.inject.Inject
 
-class MapFragment : MainNavigationFragment() {
+class MapFragment(args: Bundle?) : MainNavigationController(args) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var analyticsHelper: AnalyticsHelper
@@ -87,17 +89,25 @@ class MapFragment : MainNavigationFragment() {
         private const val ALPHA_TRANSITION_START = 0.1f
 
         fun newInstance(featureId: String, featureStartTime: Long): MapFragment {
-            return MapFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_FEATURE_ID, featureId)
-                    putLong(ARG_FEATURE_START_TIME, featureStartTime)
-                }
+            val arguments = Bundle().apply {
+                putString(ARG_FEATURE_ID, featureId)
+                putLong(ARG_FEATURE_START_TIME, featureStartTime)
             }
+            return MapFragment(arguments)
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
+        viewModel = viewModelProvider(viewModelFactory)
+        binding = FragmentMapBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@MapFragment.viewModel
+        }
+        return binding.root
+    }
+
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
+        //from onCreate
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY)
         }
@@ -105,25 +115,14 @@ class MapFragment : MainNavigationFragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             onBackPressed()
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewModel = viewModelProvider(viewModelFactory)
-        binding = FragmentMapBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = this@MapFragment.viewModel
-        }
-
+        //from onCreateView
         mapView = binding.map.apply {
             onCreate(mapViewBundle)
         }
 
         if (savedInstanceState == null) {
-            MapFragmentArgs.fromBundle(arguments ?: Bundle.EMPTY).run {
+            MapFragmentArgs.fromBundle(args ?: Bundle.EMPTY).run {
                 if (!featureId.isNullOrEmpty()) {
                     viewModel.requestHighlightFeature(featureId)
                 }
@@ -136,12 +135,7 @@ class MapFragment : MainNavigationFragment() {
                 viewModel.setMapVariant(variant)
             }
         }
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        //----
         fabBaseMarginBottom = binding.mapModeFab.marginBottom
 
         binding.toolbar.run {
@@ -251,7 +245,7 @@ class MapFragment : MainNavigationFragment() {
             }
 
         binding.mapModeFab.setOnClickListener {
-            MapVariantSelectionDialogFragment().show(childFragmentManager, "MAP_MODE_DIALOG")
+            MapVariantSelectionDialogFragment().show(requireFragmentManager(), "MAP_MODE_DIALOG")
         }
 
         // Initialize MapView
@@ -325,28 +319,28 @@ class MapFragment : MainNavigationFragment() {
         mapView.onSaveInstanceState(mapViewBundle)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onActivityResumed(activity: Activity) {
+        super.onActivityResumed(activity)
         mapView.onResume()
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onActivityStarted(activity: Activity) {
+        super.onActivityStarted(activity)
         mapView.onStart()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onActivityStopped(activity: Activity) {
+        super.onActivityStopped(activity)
         mapView.onStop()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onActivityPaused(activity: Activity) {
+        super.onActivityPaused(activity)
         mapView.onPause()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    /*override fun onActivityDestroy(activity: Activity) {
+        super.onActivityDestroy()
         mapView.onDestroy()
         viewModel.onMapDestroyed()
     }
@@ -354,7 +348,7 @@ class MapFragment : MainNavigationFragment() {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
-    }
+    }*/
 
     private fun updateMarkers(geoJsonLayer: GeoJsonLayer) {
         geoJsonLayer.addLayerToMap()
@@ -365,14 +359,14 @@ class MapFragment : MainNavigationFragment() {
     }
 
     private fun requestLocationPermission() {
-        val context = context ?: return
+        val context = view?.context ?: return
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
             PackageManager.PERMISSION_GRANTED) {
             return
         }
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
             MyLocationRationaleFragment()
-                .show(childFragmentManager, FRAGMENT_MY_LOCATION_RATIONALE)
+                .show(requireFragmentManager(), FRAGMENT_MY_LOCATION_RATIONALE)
             return
         }
         requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -389,7 +383,7 @@ class MapFragment : MainNavigationFragment() {
                 enableMyLocation()
             } else {
                 MyLocationRationaleFragment()
-                    .show(childFragmentManager, FRAGMENT_MY_LOCATION_RATIONALE)
+                    .show(requireFragmentManager(), FRAGMENT_MY_LOCATION_RATIONALE)
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -397,7 +391,7 @@ class MapFragment : MainNavigationFragment() {
     }
 
     private fun enableMyLocation(requestPermission: Boolean = false) {
-        val context = context ?: return
+        val context = view?.context ?: return
         when {
             ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED -> {

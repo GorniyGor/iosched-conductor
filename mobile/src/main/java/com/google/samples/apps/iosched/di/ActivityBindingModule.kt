@@ -24,6 +24,7 @@ import com.google.samples.apps.iosched.ui.MainActivityModule
 import com.google.samples.apps.iosched.ui.agenda.AgendaModule
 import com.google.samples.apps.iosched.ui.codelabs.CodelabsModule
 import com.google.samples.apps.iosched.ui.feed.FeedModule
+import com.google.samples.apps.iosched.ui.info.InfoFragmentsModule
 import com.google.samples.apps.iosched.ui.info.InfoModule
 import com.google.samples.apps.iosched.ui.map.MapModule
 import com.google.samples.apps.iosched.ui.onboarding.OnboardingActivity
@@ -78,6 +79,7 @@ abstract class ActivityBindingModule {
             CodelabsModule::class,
 //            FeedModule::class,
             InfoModule::class,
+            InfoFragmentsModule::class, //for watching on controller-fragment interaction
             MapModule::class,
 //            ScheduleModule::class,
             SearchModule::class,

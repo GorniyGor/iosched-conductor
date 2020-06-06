@@ -22,21 +22,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePaddingRelative
 import com.google.samples.apps.iosched.R
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
-import dagger.android.support.DaggerFragment
 
-class FaqFragment : DaggerFragment() {
+class FaqFragment : MainNavigationController() {
 
-    override fun onCreateView(
+    override fun inflateView(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        container: ViewGroup
+    ): View {
         return inflater.inflate(R.layout.fragment_info_faq, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
+        super.onViewBound(view, savedInstanceState)
 
         // Pad the bottom of the ScrollView so that it scrolls up above the nav bar
         view.doOnApplyWindowInsets { v, insets, padding ->

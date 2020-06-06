@@ -26,7 +26,6 @@ import androidx.core.view.updatePaddingRelative
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.common.collect.ImmutableMap
 import com.google.samples.apps.iosched.MainApplication
@@ -50,6 +49,7 @@ import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.signin.setupProfileMenuItem
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.executeAfter
 import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.openWebsiteUrl
 import timber.log.Timber
@@ -75,35 +75,20 @@ class FeedFragment : MainNavigationController()  {
     private lateinit var binding: FragmentFeedBinding
     private var adapter: FeedAdapter? = null
     private lateinit var sessionsViewBinder: FeedSessionsViewBinder
-    private val viewLifecycleOwner: LifecycleOwner = this
-
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        if (::sessionsViewBinder.isInitialized) {
-            outState.putParcelable(
-                BUNDLE_KEY_SESSIONS_LAYOUT_MANAGER_STATE,
-                sessionsViewBinder.recyclerViewManagerState
-            )
-        }
-        super.onSaveInstanceState(outState)
-    }
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
-        val appComponent = (inflater.context.applicationContext as MainApplication).appComponent
-        appComponent.getControllerComponent().inject(this)
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+        binding = FragmentFeedBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewBound(view: View, savedInstanceState: Bundle?) {
-        //FROM onCreate--------------------
         model = viewModelProvider(viewModelFactory)
 
-        binding = FragmentFeedBinding.bind(view).apply {
+        binding.executeAfter {
             lifecycleOwner = viewLifecycleOwner
             viewModel = model
         }
 
-        //FROM onCreateView----------------
         analyticsHelper.sendScreenView("Home", requireActivity())
 
         binding.toolbar.setupProfileMenuItem(activityViewModelProvider(viewModelFactory), this)
@@ -165,6 +150,16 @@ class FeedFragment : MainNavigationController()  {
         model.navigateToMapAction.observe(this, EventObserver { moment ->
             openMap(moment)
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (::sessionsViewBinder.isInitialized) {
+            outState.putParcelable(
+                BUNDLE_KEY_SESSIONS_LAYOUT_MANAGER_STATE,
+                sessionsViewBinder.recyclerViewManagerState
+            )
+        }
+        super.onSaveInstanceState(outState)
     }
 
     private fun openSessionDetail(id: SessionId) {

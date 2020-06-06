@@ -26,11 +26,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +40,7 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.samples.apps.iosched.R
+import com.google.samples.apps.iosched.R.id
 import com.google.samples.apps.iosched.ar.ArActivity
 import com.google.samples.apps.iosched.databinding.NavigationHeaderBinding
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsActions
@@ -64,7 +65,7 @@ import com.google.samples.apps.iosched.util.signin.FirebaseAuthErrorCodeConverte
 import com.google.samples.apps.iosched.util.updateForTheme
 import com.google.samples.apps.iosched.widget.HashtagIoDecoration
 import com.google.samples.apps.iosched.widget.NavigationBarContentFrameLayout
-import com.google.samples.apps.iosched.widget.navigation.ConductorNavHost
+import com.google.samples.apps.iosched.widget.conductor.ConductorNavHost
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import java.util.UUID
@@ -103,6 +104,8 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
 
     @Inject
     lateinit var analyticsHelper: AnalyticsHelper
+
+    var lf: LifecycleOwner? = null
 
     @Inject
     @JvmField
@@ -178,7 +181,9 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         navHeaderBinding = NavigationHeaderBinding.inflate(layoutInflater).apply {
             lifecycleOwner = this@MainActivity
         }
-        navHostFragment = ConductorNavHost(this, findViewById(R.id.view_container), savedInstanceState)
+        navHostFragment =
+            ConductorNavHost(
+                this, findViewById(id.view_container), savedInstanceState)
         navController = findNavController(R.id.view_container)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             currentNavId = destination.id
@@ -311,14 +316,12 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
 
     override fun onUserInteraction() {
         super.onUserInteraction()
-//        getCurrentFragment()?.onUserInteraction()
+        getCurrentFragment()?.onUserInteraction()
     }
 
-//    private fun getCurrentFragment(): MainNavigationFragment? {
-//        return navHostFragment
-//            ?.childFragmentManager
-//            ?.primaryNavigationFragment as? MainNavigationFragment
-//    }
+    private fun getCurrentFragment(): MainNavigationController? {
+        return navHostFragment?.router?.backstack?.let { it[it.size-1].controller } as? MainNavigationController
+    }
 
     private fun navigateTo(navId: Int) {
         if (navId == currentNavId) {

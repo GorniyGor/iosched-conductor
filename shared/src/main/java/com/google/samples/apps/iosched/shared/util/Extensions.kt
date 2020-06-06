@@ -34,6 +34,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.bluelinelabs.conductor.Controller
 import com.google.samples.apps.iosched.shared.BuildConfig
 import com.bluelinelabs.conductor.Controller
 import org.threeten.bp.ZonedDateTime
@@ -114,6 +115,12 @@ fun Controller.requireContext(): Context {
     return this.view?.context ?: throw IllegalStateException("Controller $this not attached to a context.")
 }
 
+fun Controller.requireFragmentManager(): FragmentManager {
+    return requireActivity().supportFragmentManager
+        ?: throw java.lang.IllegalStateException(
+            "Fragment $this not associated with a fragment manager.")
+}
+
 /**
  * Like [Fragment.viewModelProvider] for Fragments that want a [ViewModel] scoped to the parent
  * Fragment.
@@ -125,8 +132,7 @@ inline fun <reified VM : ViewModel> Fragment.parentViewModelProvider(
 
 inline fun <reified VM : ViewModel> Controller.parentViewModelProvider(
     provider: ViewModelProvider.Factory
-) =
-    ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
+) = ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
 
 // endregion
 // region Parcelables, Bundles

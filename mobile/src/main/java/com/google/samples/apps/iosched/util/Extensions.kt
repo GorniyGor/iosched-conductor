@@ -318,5 +318,5 @@ fun <T> MutableCollection<T>.compatRemoveIf(predicate: (T) -> Boolean): Boolean 
     return removed
 }
 
-
+//TODO( may be ClassCastException: 'view!!' )
 fun Controller.findNavController(): NavController = Navigation.findNavController(view!!)

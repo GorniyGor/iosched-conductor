@@ -18,7 +18,6 @@ package com.google.samples.apps.iosched.ui.info
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -34,15 +33,16 @@ import com.google.samples.apps.iosched.databinding.FragmentInfoEventBinding
 import com.google.samples.apps.iosched.model.ConferenceWifiInfo
 import com.google.samples.apps.iosched.shared.di.AssistantAppEnabledFlag
 import com.google.samples.apps.iosched.shared.util.TimeUtils
+import com.google.samples.apps.iosched.shared.util.requireActivity
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
 import com.google.samples.apps.iosched.widget.FadingSnackbar
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class EventFragment : DaggerFragment() {
+class EventFragment : MainNavigationController() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var snackbarMessageManager: SnackbarMessageManager
@@ -54,12 +54,10 @@ class EventFragment : DaggerFragment() {
 
     private lateinit var eventInfoViewModel: EventInfoViewModel
 
-    override fun onCreateView(
+    override fun inflateView(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        context ?: return null
+        container: ViewGroup
+    ): View {
         eventInfoViewModel = viewModelProvider(viewModelFactory)
 
         val binding = FragmentInfoEventBinding.inflate(inflater, container, false).apply {
@@ -74,17 +72,15 @@ class EventFragment : DaggerFragment() {
         }
 
         val snackbarLayout = requireActivity().findViewById<FadingSnackbar>(R.id.snackbar)
-        setUpSnackbar(eventInfoViewModel.snackBarMessage, snackbarLayout, snackbarMessageManager)
+        setUpSnackbar(eventInfoViewModel.snackBarMessage, snackbarLayout, snackbarMessageManager,
+            context = container.context)
 
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         eventInfoViewModel.openUrlEvent.observe(this, Observer {
             val url = it?.getContentIfNotHandled() ?: return@Observer
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         })
+
+        return binding.root
     }
 }
 

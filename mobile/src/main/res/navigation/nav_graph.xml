@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2019 Google LLC
+  ~ Copyright 2020 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_feed">
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_schedule"
         android:name="com.google.samples.apps.iosched.ui.schedule.ScheduleFragment"
         android:label="@string/title_schedule"
@@ -40,27 +40,27 @@
         <action
             android:id="@+id/to_search"
             app:destination="@id/navigation_search" />
-    </fragment>
+    </conductor_controller>
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_info"
         android:name="com.google.samples.apps.iosched.ui.info.InfoFragment"
         android:label="@string/title_info"
         tools:layout="@layout/fragment_info" />
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_agenda"
         android:name="com.google.samples.apps.iosched.ui.agenda.AgendaFragment"
         android:label="@string/agenda"
         tools:layout="@layout/fragment_agenda" />
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_settings"
         android:name="com.google.samples.apps.iosched.ui.settings.SettingsFragment"
         android:label="@string/settings_title"
         tools:layout="@layout/fragment_settings" />
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_feed"
         android:name="com.google.samples.apps.iosched.ui.feed.FeedFragment"
         android:label="@string/title_home"
@@ -93,9 +93,9 @@
                 android:defaultValue="0L"
                 app:argType="long" />
         </action>
-    </fragment>
+    </conductor_controller>
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_map"
         android:name="com.google.samples.apps.iosched.ui.map.MapFragment"
         android:label="@string/title_map"
@@ -117,9 +117,9 @@
             android:name="startTime"
             android:defaultValue="0L"
             app:argType="long" />
-    </fragment>
+    </conductor_controller>
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_codelabs"
         android:name="com.google.samples.apps.iosched.ui.codelabs.CodelabsFragment"
         android:label="@string/event_codelabs_title"
@@ -136,9 +136,9 @@
                 android:defaultValue="codelabs"
                 app:argType="string" />
         </action>
-    </fragment>
+    </conductor_controller>
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_search"
         android:name="com.google.samples.apps.iosched.ui.search.SearchFragment"
         tools:layout="@layout/fragment_search">
@@ -148,9 +148,9 @@
         <action
             android:id="@+id/to_speaker_detail"
             app:destination="@id/navigation_speaker_detail" />
-    </fragment>
+    </conductor_controller>
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_session_detail"
         android:name="com.google.samples.apps.iosched.ui.sessiondetail.SessionDetailFragment"
         tools:layout="@layout/fragment_session_detail">
@@ -166,9 +166,9 @@
         <action
             android:id="@+id/to_map"
             app:destination="@id/navigation_map_sublevel" />
-    </fragment>
+    </conductor_controller>
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_speaker_detail"
         android:name="com.google.samples.apps.iosched.ui.speaker.SpeakerFragment"
         tools:layout="@layout/fragment_speaker">
@@ -178,14 +178,14 @@
         <action
             android:id="@+id/to_session_detail"
             app:destination="@id/navigation_session_detail" />
-    </fragment>
+    </conductor_controller>
 
     <!-- Map can be be shown as a non-top-level screen, e.g. when entering from Session Detail. In
          these cases the back button navigates back through the sub-level screens, so we should show
          the back/up arrow in the toolbar. We accomplish that by creating another destination using
          the same MapFragment but a different ID.
     -->
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_map_sublevel"
         android:name="com.google.samples.apps.iosched.ui.map.MapFragment"
         android:label="@string/title_map"
@@ -205,15 +205,15 @@
             android:name="startTime"
             android:defaultValue="0L"
             app:argType="long" />
-    </fragment>
+    </conductor_controller>
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_no_network_ar"
         android:name="com.google.samples.apps.iosched.ui.ar.NoNetworkConnectionFragment"
         android:label="@string/no_network_connection"
         tools:layout="@layout/fragment_no_network" />
 
-    <fragment
+    <conductor_controller
         android:id="@id/navigation_phone_does_not_support_arcore"
         android:name="com.google.samples.apps.iosched.ui.ar.ArCoreNotSupportedFragment"
         android:label="@string/phone_does_not_support_arcore_title"

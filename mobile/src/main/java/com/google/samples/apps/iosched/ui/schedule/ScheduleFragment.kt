@@ -23,7 +23,6 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePaddingRelative
@@ -83,7 +82,7 @@ import javax.inject.Named
 /**
  * The Schedule page of the top-level Activity.
  */
-class ScheduleFragment : MainNavigationController() {
+class ScheduleFragment(args: Bundle?) : MainNavigationController(args) {
 
     companion object {
         private const val DIALOG_NEED_TO_SIGN_IN = "dialog_need_to_sign_in"
@@ -131,6 +130,11 @@ class ScheduleFragment : MainNavigationController() {
         return inflater.inflate(R.layout.fragment_schedule, container, false)
     }
 
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
+        binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewBound(view: View, savedInstanceState: Bundle?) {
         //FROM onCreate--------------------
         requireActivity().onBackPressedDispatcher.addCallback(this) {
@@ -139,10 +143,11 @@ class ScheduleFragment : MainNavigationController() {
         //FROM onCreateView----------------
         // ViewModel shared with child fragments.
         scheduleViewModel = viewModelProvider(viewModelFactory)
-        binding = FragmentScheduleBinding.bind(view).apply {
+        binding.executeAfter {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@ScheduleFragment.scheduleViewModel
         }
+
         getChildRouter(view.findViewById(R.id.filter_sheet))
             .setRoot(RouterTransaction.with(ScheduleFilterFragment()))
 
