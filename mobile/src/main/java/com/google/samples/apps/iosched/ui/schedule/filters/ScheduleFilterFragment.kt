@@ -19,7 +19,6 @@ package com.google.samples.apps.iosched.ui.schedule.filters
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnAttachStateChangeListener
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
@@ -38,7 +37,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
-import com.google.samples.apps.iosched.MainApplication
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentScheduleFilterBinding
 import com.google.samples.apps.iosched.shared.util.parentViewModelProvider

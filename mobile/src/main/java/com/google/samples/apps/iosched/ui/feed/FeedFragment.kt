@@ -23,13 +23,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.view.updatePaddingRelative
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.common.collect.ImmutableMap
-import com.google.samples.apps.iosched.MainApplication
-import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentFeedBinding
 import com.google.samples.apps.iosched.model.Moment
 import com.google.samples.apps.iosched.model.SessionId

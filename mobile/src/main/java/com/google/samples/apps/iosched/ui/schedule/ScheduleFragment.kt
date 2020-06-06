@@ -20,13 +20,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePaddingRelative
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -36,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
 import com.bluelinelabs.conductor.RouterTransaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.samples.apps.iosched.MainApplication
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentScheduleBinding
 import com.google.samples.apps.iosched.model.ConferenceDay
@@ -121,14 +117,8 @@ class ScheduleFragment(args: Bundle?) : MainNavigationController(args) {
 
     private lateinit var dayIndexer: ConferenceDayIndexer
     private var cachedBubbleRange: IntRange? = null
-    private val viewLifecycleOwner: LifecycleOwner = this
 
     private lateinit var binding: FragmentScheduleBinding
-    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
-        val appComponent = (inflater.context.applicationContext as MainApplication).appComponent
-        appComponent.getControllerComponent().inject(this)
-        return inflater.inflate(R.layout.fragment_schedule, container, false)
-    }
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)

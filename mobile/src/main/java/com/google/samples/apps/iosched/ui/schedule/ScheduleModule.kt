@@ -20,10 +20,6 @@ import androidx.lifecycle.ViewModel
 import com.google.samples.apps.iosched.shared.di.ChildFragmentScoped
 import com.google.samples.apps.iosched.shared.di.FragmentScoped
 import com.google.samples.apps.iosched.shared.di.ViewModelKey
-import com.google.samples.apps.iosched.shared.domain.prefs.MarkScheduleUiHintsShownUseCase
-import com.google.samples.apps.iosched.ui.DaggerController.ViewScope
-import com.google.samples.apps.iosched.ui.prefs.PreferenceModule
-import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
 import com.google.samples.apps.iosched.ui.schedule.filters.ScheduleFilterFragment
 import com.google.samples.apps.iosched.ui.sessioncommon.SessionViewPoolModule
 import dagger.Binds
@@ -35,32 +31,27 @@ import dagger.multibindings.IntoMap
 /**
  * Module where classes needed to create the [ScheduleFragment] are defined.
  */
-@Module(includes = [SessionViewPoolModule::class, SubScheduleModuleC::class, PreferenceModule::class])
-class ScheduleModule {
+@Module
+@Suppress("UNUSED")
+internal abstract class ScheduleModule {
 
     /**
      * Generates an [AndroidInjector] for the [ScheduleFragment].
      */
-//    @ViewScope
-//    @ContributesAndroidInjector(
-//        modules = [
-//            SessionViewPoolModule::class
-//        ]
-//    )
-//    internal abstract fun contributeScheduleFragment(): ScheduleController
+    @FragmentScoped
+    @ContributesAndroidInjector(
+        modules = [
+            SessionViewPoolModule::class
+        ]
+    )
+    internal abstract fun contributeScheduleFragment(): ScheduleFragment
 
     /**
      * Generates an [AndroidInjector] for the [ScheduleFilterFragment].
      */
-//    @ViewScope
-//    @ContributesAndroidInjector
-//    internal abstract fun contributeScheduleFilterFragment(): ScheduleFilterFragment
-
-}
-
-@Module
-abstract class SubScheduleModuleC {
-
+    @FragmentScoped
+    @ContributesAndroidInjector
+    internal abstract fun contributeScheduleFilterFragment(): ScheduleFilterFragment
 
     /**
      * Generates an [AndroidInjector] for the [ScheduleUiHintsDialogFragment].

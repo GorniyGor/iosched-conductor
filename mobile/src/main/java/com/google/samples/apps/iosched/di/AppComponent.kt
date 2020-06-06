@@ -58,6 +58,4 @@ interface AppComponent : AndroidInjector<MainApplication> {
     interface Factory {
         fun create(@BindsInstance application: MainApplication): AppComponent
     }
-
-    fun getControllerComponent(): ControllerComponent
 }

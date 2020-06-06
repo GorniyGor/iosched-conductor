@@ -36,7 +36,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.bluelinelabs.conductor.Controller
 import com.google.samples.apps.iosched.shared.BuildConfig
-import com.bluelinelabs.conductor.Controller
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 
