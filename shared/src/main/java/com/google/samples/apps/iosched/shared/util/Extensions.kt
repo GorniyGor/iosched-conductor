@@ -22,7 +22,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.ParcelCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -105,8 +104,8 @@ inline fun <reified VM : ViewModel> Controller.activityViewModelProvider(
 ) =
     ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
 
-fun Controller.requireActivity(): AppCompatActivity {
-    return this.activity as AppCompatActivity?
+fun Controller.requireActivity(): FragmentActivity {
+    return this.activity as FragmentActivity?
         ?: throw IllegalStateException("Controller $this not attached to an activity.")
 }
 
