@@ -313,7 +313,7 @@ class MapFragment(args: Bundle?) : MainNavigationController(args) {
         return false
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
+    /*override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY)
             ?: Bundle().apply { putBundle(MAPVIEW_BUNDLE_KEY, this) }
@@ -340,7 +340,7 @@ class MapFragment(args: Bundle?) : MainNavigationController(args) {
         mapView.onPause()
     }
 
-    /*override fun onActivityDestroy(activity: Activity) {
+    override fun onActivityDestroy(activity: Activity) {
         super.onActivityDestroy()
         mapView.onDestroy()
         viewModel.onMapDestroyed()

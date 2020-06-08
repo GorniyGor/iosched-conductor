@@ -104,7 +104,6 @@ class SessionDetailFragment(args: Bundle?) : MainNavigationController(args), Ses
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         sessionDetailViewModel = viewModelProvider(viewModelFactory)
-        (activity as MainActivity).lf = this
         //TODO( fragment animation methods )
         /*sharedElementReturnTransition =
             TransitionInflater.from(container.context).inflateTransition(R.transition.speaker_shared_enter)

@@ -100,8 +100,6 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
     @Inject
     lateinit var analyticsHelper: AnalyticsHelper
 
-    var lf: LifecycleOwner? = null
-
     @Inject
     @JvmField
     @MapFeatureEnabledFlag
