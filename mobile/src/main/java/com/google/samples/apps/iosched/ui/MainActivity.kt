@@ -19,6 +19,7 @@ package com.google.samples.apps.iosched.ui
 import android.app.Activity
 import android.content.Intent
 import android.net.ConnectivityManager
+import androidx.activity.addCallback
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -262,6 +263,9 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
             Timber.d("Signed in user can demo ar = $it")
             canSignedInUserDemoAr = it
         })
+        onBackPressedDispatcher.addCallback(this){
+            navController.popBackStack()
+        }
     }
 
     override fun registerToolbarWithNavigation(toolbar: Toolbar) {
@@ -288,6 +292,10 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
                 )
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     override fun onBackPressed() {
