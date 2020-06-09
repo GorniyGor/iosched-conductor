@@ -77,7 +77,9 @@ class ConductorNavigator(private val router: Router): Navigator<Destination>() {
     override fun createDestination(): Destination = Destination(
         this)
 
-    override fun popBackStack(): Boolean = router.handleBack()
+    override fun popBackStack(): Boolean {
+        return router.handleBack()
+    }
 
     @NavDestination.ClassType(Controller::class)
     class Destination: NavDestination {

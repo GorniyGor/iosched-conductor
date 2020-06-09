@@ -32,6 +32,7 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.view.View.OnAttachStateChangeListener
 import androidx.annotation.DimenRes
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
@@ -41,12 +42,15 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ViewDataBinding
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bluelinelabs.conductor.Controller
 import com.google.samples.apps.iosched.model.Theme
+import com.google.samples.apps.iosched.ui.MainActivity
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
 import dagger.android.support.DaggerFragment
 
 fun ObservableBoolean.hasSameValue(other: ObservableBoolean) = get() == other.get()
@@ -316,6 +320,34 @@ fun <T> MutableCollection<T>.compatRemoveIf(predicate: (T) -> Boolean): Boolean 
         }
     }
     return removed
+}
+
+@VisibleForTesting
+fun Controller.startTraceForTest(type: TestType) {
+    if(activity !is MainActivity) return
+    (activity as MainActivity).traces.getValue(type).start()
+    (activity as MainActivity).idlingResources.getValue(TestType.Schedule_Details).setIdleState(false)
+}
+
+@VisibleForTesting
+fun Controller.finishTraceForTest(type: TestType) {
+    if(activity !is MainActivity) return
+    (activity as MainActivity).traces.getValue(type).stop()
+    (activity as MainActivity).traces[type] = MainActivity.getTraceNewInstance(type)
+    (activity as MainActivity).idlingResources.getValue(TestType.Schedule_Details).setIdleState(true)
+}
+
+@VisibleForTesting
+fun MainActivity.startTraceForTest(type: TestType) {
+    traces.getValue(type).start()
+    idlingResources.getValue(TestType.Schedule_Details).setIdleState(false)
+}
+
+@VisibleForTesting
+fun MainActivity.finishTraceForTest(type: TestType) {
+    traces.getValue(type).stop()
+    traces[type] = MainActivity.getTraceNewInstance(type)
+    idlingResources.getValue(TestType.Schedule_Details).setIdleState(true)
 }
 
 //TODO( may be ClassCastException: 'view!!' )

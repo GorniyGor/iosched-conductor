@@ -320,6 +320,8 @@ class MapFragment(args: Bundle?) : MainNavigationController(args) {
         mapView.onSaveInstanceState(mapViewBundle)
     }
 
+    // Callbacks was transferred not correct completely -------------------------
+
     override fun onActivityResumed(activity: Activity) {
         super.onActivityResumed(activity)
         mapView.onResume()
@@ -350,6 +352,8 @@ class MapFragment(args: Bundle?) : MainNavigationController(args) {
         super.onLowMemory()
         mapView.onLowMemory()
     }*/
+
+    //------------------------------------------------------------------------------
 
     private fun updateMarkers(geoJsonLayer: GeoJsonLayer) {
         geoJsonLayer.addLayerToMap()

@@ -32,6 +32,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
+import com.bluelinelabs.conductor.ControllerChangeHandler
+import com.bluelinelabs.conductor.ControllerChangeType
 import com.bluelinelabs.conductor.RouterTransaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.samples.apps.iosched.R
@@ -48,6 +50,8 @@ import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
 import com.google.samples.apps.iosched.shared.util.requireActivity
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
 import com.google.samples.apps.iosched.ui.MainNavigationController
+import com.google.samples.apps.iosched.ui.MainActivity
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
 import com.google.samples.apps.iosched.ui.schedule.ScheduleFragmentDirections.Companion.toSearch
@@ -63,8 +67,10 @@ import com.google.samples.apps.iosched.util.clearDecorations
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
 import com.google.samples.apps.iosched.util.executeAfter
 import com.google.samples.apps.iosched.util.fabVisibility
+import com.google.samples.apps.iosched.util.finishTraceForTest
 import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.requestApplyInsetsWhenAttached
+import com.google.samples.apps.iosched.util.startTraceForTest
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior.BottomSheetCallback
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior.Companion.STATE_COLLAPSED
@@ -128,6 +134,8 @@ class ScheduleFragment(args: Bundle?) : MainNavigationController(args) {
 
     override fun onViewBound(view: View, savedInstanceState: Bundle?) {
         //FROM onCreate--------------------
+        //enabled = false only for FeedScreenTest.clickOnBurger_clickOnSchedule_sessionOnFirstDayShown test
+        //but "false" drops ScheduleTest.filters_applyAFilter and ScheduleTest.filters_clearFilters tests
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             onBackPressed()
         }
@@ -254,6 +262,7 @@ class ScheduleFragment(args: Bundle?) : MainNavigationController(args) {
         })
 
         scheduleViewModel.navigateToSessionAction.observe(this, EventObserver { sessionId ->
+            startTraceForTest(TestType.Schedule_Details)
             openSessionDetail(sessionId)
         })
 
@@ -448,5 +457,11 @@ class ScheduleFragment(args: Bundle?) : MainNavigationController(args) {
     private fun openNotificationsPreferenceDialog() {
         val dialog = NotificationsPreferenceDialogFragment()
         dialog.show(requireActivity().supportFragmentManager, DIALOG_NOTIFICATIONS_PREFERENCE)
+    }
+
+    override fun onAttach(view: View) {
+        super.onAttach(view)
+        finishTraceForTest(TestType.Feed_Schedule)
+        (activity as MainActivity).idlingResources.getValue(TestType._Service).setIdleState(true)
     }
 }
