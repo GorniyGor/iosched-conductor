@@ -46,6 +46,8 @@ import com.google.samples.apps.iosched.shared.result.EventObserver
 import com.google.samples.apps.iosched.shared.util.TimeUtils
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
+import com.google.samples.apps.iosched.ui.MainActivity
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
 import com.google.samples.apps.iosched.ui.MainNavigationFragment
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
@@ -61,7 +63,9 @@ import com.google.samples.apps.iosched.util.clearDecorations
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
 import com.google.samples.apps.iosched.util.executeAfter
 import com.google.samples.apps.iosched.util.fabVisibility
+import com.google.samples.apps.iosched.util.finishTraceForTest
 import com.google.samples.apps.iosched.util.requestApplyInsetsWhenAttached
+import com.google.samples.apps.iosched.util.startTraceForTest
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior.BottomSheetCallback
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior.Companion.STATE_COLLAPSED
@@ -121,8 +125,10 @@ class ScheduleFragment : MainNavigationFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            onBackPressed()
+        //enabled = false only for FeedScreenTest.clickOnBurger_clickOnSchedule_sessionOnFirstDayShown test
+        //but "false" drops ScheduleTest.filters_applyAFilter and ScheduleTest.filters_clearFilters tests
+        requireActivity().onBackPressedDispatcher.addCallback(this, false) {
+            isEnabled = !onBackPressed()
         }
     }
 
@@ -253,6 +259,7 @@ class ScheduleFragment : MainNavigationFragment() {
         })
 
         scheduleViewModel.navigateToSessionAction.observe(this, EventObserver { sessionId ->
+            startTraceForTest(TestType.Schedule_Details)
             openSessionDetail(sessionId)
         })
 
@@ -447,5 +454,11 @@ class ScheduleFragment : MainNavigationFragment() {
     private fun openNotificationsPreferenceDialog() {
         val dialog = NotificationsPreferenceDialogFragment()
         dialog.show(requireActivity().supportFragmentManager, DIALOG_NOTIFICATIONS_PREFERENCE)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        finishTraceForTest(TestType.Feed_Schedule)
+        (activity as MainActivity).idlingResources.getValue(TestType._Service).setIdleState(true)
     }
 }

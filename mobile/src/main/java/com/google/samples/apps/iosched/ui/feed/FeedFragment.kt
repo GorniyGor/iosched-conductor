@@ -36,6 +36,8 @@ import com.google.samples.apps.iosched.shared.result.EventObserver
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
 import com.google.samples.apps.iosched.shared.util.toEpochMilli
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
+import com.google.samples.apps.iosched.ui.MainActivity
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
 import com.google.samples.apps.iosched.ui.MainNavigationFragment
 import com.google.samples.apps.iosched.ui.feed.FeedFragmentDirections.Companion.toMap
 import com.google.samples.apps.iosched.ui.feed.FeedFragmentDirections.Companion.toSchedule
@@ -45,6 +47,7 @@ import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.signin.setupProfileMenuItem
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.finishTraceForTest
 import com.google.samples.apps.iosched.util.openWebsiteUrl
 import timber.log.Timber
 import javax.inject.Inject
@@ -241,5 +244,11 @@ class FeedFragment : MainNavigationFragment() {
 
     private fun openLiveStreamUrl(url: String) {
         openWebsiteUrl(requireContext(), url)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        finishTraceForTest(TestType.Activity_Feed)
+        (activity as MainActivity).idlingResources.getValue(TestType._Service).setIdleState(true)
     }
 }

@@ -210,6 +210,6 @@ class ScheduleTest {
     }
 
     companion object {
-        private const val FAKE_SESSION_ON_DAY1 = "Fake session on day 1"
+        const val FAKE_SESSION_ON_DAY1 = "Fake session on day 1"
     }
 }
