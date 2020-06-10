@@ -140,6 +140,6 @@ class FeedScreenTest {
     }
 
     companion object{
-        const val COUNT = 3
+        const val COUNT = 100
     }
 }

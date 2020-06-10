@@ -323,7 +323,7 @@ fun <T> MutableCollection<T>.compatRemoveIf(predicate: (T) -> Boolean): Boolean 
 fun Fragment.startTraceForTest(type: TestType) {
     if(activity !is MainActivity) return
     (activity as MainActivity).traces.getValue(type).start()
-    (activity as MainActivity).idlingResources.getValue(TestType.Schedule_Details).setIdleState(false)
+    (activity as MainActivity).idlingResources.getValue(type).setIdleState(false)
 }
 
 @VisibleForTesting
@@ -331,18 +331,18 @@ fun Fragment.finishTraceForTest(type: TestType) {
     if(activity !is MainActivity) return
     (activity as MainActivity).traces.getValue(type).stop()
     (activity as MainActivity).traces[type] = MainActivity.getTraceNewInstance(type)
-    (activity as MainActivity).idlingResources.getValue(TestType.Schedule_Details).setIdleState(true)
+    (activity as MainActivity).idlingResources.getValue(type).setIdleState(true)
 }
 
 @VisibleForTesting
 fun MainActivity.startTraceForTest(type: TestType) {
     traces.getValue(type).start()
-    idlingResources.getValue(TestType.Schedule_Details).setIdleState(false)
+    idlingResources.getValue(type).setIdleState(false)
 }
 
 @VisibleForTesting
 fun MainActivity.finishTraceForTest(type: TestType) {
     traces.getValue(type).stop()
     traces[type] = MainActivity.getTraceNewInstance(type)
-    idlingResources.getValue(TestType.Schedule_Details).setIdleState(true)
+    idlingResources.getValue(type).setIdleState(true)
 }

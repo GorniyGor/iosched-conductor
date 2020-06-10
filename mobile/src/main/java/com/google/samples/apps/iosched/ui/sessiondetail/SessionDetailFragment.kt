@@ -284,7 +284,6 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
 
     override fun onResume() {
         super.onResume()
-        println()
         finishTraceForTest(TestType.Schedule_Details)
     }
     override fun onStop() {
