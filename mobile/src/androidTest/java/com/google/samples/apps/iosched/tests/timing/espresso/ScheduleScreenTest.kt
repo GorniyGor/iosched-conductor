@@ -93,10 +93,10 @@ class ScheduleScreenTest {
             //---
         }
     }
-    // TODO( onBackPressure is wrong )
 
     //problem - some traces was invalid "Trace 'anyname' is started but not stopped when it is destructed!"
-    /*@get:Rule
+    // P.s. the problem was with Fragments, there isn't with Controllers
+    @get:Rule
     var repeatRule = RepeatRule()
     @Test
     @Repeat(times = COUNT+1)
@@ -106,5 +106,5 @@ class ScheduleScreenTest {
 
         onView(withId(R.id.session_detail_title)).check(matches(isDisplayed()))
         Thread.sleep(500)
-    }*/
+    }
 }

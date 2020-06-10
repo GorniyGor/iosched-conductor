@@ -136,7 +136,7 @@ class ScheduleFragment(args: Bundle?) : MainNavigationController(args) {
         //FROM onCreate--------------------
         //enabled = false only for FeedScreenTest.clickOnBurger_clickOnSchedule_sessionOnFirstDayShown test
         //but "false" drops ScheduleTest.filters_applyAFilter and ScheduleTest.filters_clearFilters tests
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
+        requireActivity().onBackPressedDispatcher.addCallback(this, false) {
             onBackPressed()
         }
         //FROM onCreateView----------------

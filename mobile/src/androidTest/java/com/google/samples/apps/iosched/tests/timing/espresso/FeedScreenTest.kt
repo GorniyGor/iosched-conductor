@@ -102,7 +102,6 @@ class FeedScreenTest {
             pressBack()
         }
     }
-    // TODO( onBackPressure is wrong )
 
     /**
      * Feed -> Info
@@ -119,7 +118,6 @@ class FeedScreenTest {
             pressBack()
         }
     }
-    // TODO( onBackPressure is wrong )
 
     /**
      * Activity -> Feed
@@ -142,6 +140,6 @@ class FeedScreenTest {
     }
 
     companion object{
-        const val COUNT = 3
+        const val COUNT = 100
     }
 }

@@ -88,6 +88,10 @@
             android:name="firebase_crashlytics_collection_enabled"
             android:value="${crashlyticsEnabled}" />
 
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
+
         <!-- By default, these are not exported since they do not have an intent filter.
              However, explicitly saying exported="false" to communicate that these are not for
              other apps to call -->
