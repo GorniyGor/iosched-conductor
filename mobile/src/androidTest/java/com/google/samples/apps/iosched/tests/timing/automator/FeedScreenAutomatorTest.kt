@@ -19,7 +19,6 @@ package com.google.samples.apps.iosched.tests.timing.automator
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.widget.ImageView
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -27,13 +26,9 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
-import com.google.android.material.internal.NavigationMenuItemView
 import com.google.samples.apps.iosched.R
-import com.google.samples.apps.iosched.tests.timing.espresso.FeedScreenTest.Companion.COUNT
-import com.google.samples.apps.iosched.tests.ui.MainActivityTestRule
 import com.google.samples.apps.iosched.tests.ui.ScheduleTest
 import org.hamcrest.core.IsNull
-import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -98,7 +93,7 @@ class FeedScreenAutomatorTest {
      */
     @Test
     fun clickOnBurger_clickOnSchedule_sessionOnFirstDayShown() {
-        for (i in 0..COUNT) {
+        for (i in 0..100) {
             // Go to Schedule screen
             device.findObject(By.res(BASIC_SAMPLE_PACKAGE, "toolbar"))
                 .findObject(By.descContains("Open navigation drawer"))
@@ -136,9 +131,8 @@ class FeedScreenAutomatorTest {
      *
      * check Controller init
      */
-    //TODO(check with and without) | log "I/ActivityTaskManager: Displayed ... ms" (time) is written for case "without" only for first iteration
 
-    // By Custom trace: with vs without = 41 vs 58 ms [on COUNT = 10, exclude a first measure]
+    // By Custom trace: with vs without = 41 vs 58 ms [on emulator, on COUNT = 10, exclude a first measure]
     @Test
     @Repeat(times = 101)
     fun feedShown() {

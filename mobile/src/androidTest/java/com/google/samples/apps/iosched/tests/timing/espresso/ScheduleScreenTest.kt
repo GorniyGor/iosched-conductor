@@ -18,20 +18,15 @@ package com.google.samples.apps.iosched.tests.timing.espresso
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
-import androidx.test.espresso.Espresso.pressBackUnconditionally
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.tests.SetPreferencesRule
-import com.google.samples.apps.iosched.tests.SyncTaskExecutorRule
-import com.google.samples.apps.iosched.tests.timing.espresso.FeedScreenTest.Companion.COUNT
 import com.google.samples.apps.iosched.tests.ui.MainActivityTestRule
 import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
 import com.google.samples.apps.iosched.ui.SimpleIdlingResource
@@ -52,10 +47,6 @@ class ScheduleScreenTest {
 
     @get:Rule
     var activityRule = MainActivityTestRule(R.id.navigation_schedule)
-
-    // Executes tasks in a synchronous [TaskScheduler]
-    @get:Rule
-    var syncTaskExecutorRule = SyncTaskExecutorRule() //TODO(delete this copy-paste)
 
     // Sets the preferences so no welcome screens are shown
     @get:Rule
@@ -81,7 +72,7 @@ class ScheduleScreenTest {
      */
     @Test
     fun clickOnFirstItem_detailsShown_v2() {
-        for (i in 0..COUNT) {
+        for (i in 0..100) {
             onView(withId(R.id.recyclerview_schedule))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<SessionViewHolder>(0, click()))
 

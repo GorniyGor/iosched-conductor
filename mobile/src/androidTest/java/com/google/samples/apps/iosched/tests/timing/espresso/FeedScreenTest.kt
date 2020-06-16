@@ -65,10 +65,6 @@ class FeedScreenTest {
     @get:Rule
     var repeatRule = RepeatRule()
 
-    // Executes tasks in a synchronous [TaskScheduler]
-    @get:Rule
-    var syncTaskExecutorRule = SyncTaskExecutorRule() //TODO(delete this copy-paste)
-
     // Sets the preferences so no welcome screens are shown
     @get:Rule
     var preferencesRule = SetPreferencesRule()
@@ -92,7 +88,7 @@ class FeedScreenTest {
      */
     @Test
     fun clickOnBurger_clickOnSchedule_sessionOnFirstDayShown() {
-        for (i in 0..COUNT) {
+        for (i in 0..100) {
             onView(allOf(instanceOf(ImageView::class.java), withParent(withId(R.id.toolbar)))).perform(click())
             onView(allOf(instanceOf(NavigationMenuItemView::class.java), withContentDescription(R.string.title_schedule))).perform(click())
 
@@ -108,7 +104,7 @@ class FeedScreenTest {
      */
     @Test
     fun clickOnBurger_clickOnInfo_basicInfoViewDisplayed() {
-        for (i in 0..COUNT) {
+        for (i in 0..100) {
             onView(allOf(instanceOf(ImageView::class.java), withParent(withId(R.id.toolbar)))).perform(click())
             onView(allOf(instanceOf(NavigationMenuItemView::class.java), withContentDescription(R.string.title_info))).perform(click())
 
@@ -128,7 +124,7 @@ class FeedScreenTest {
 
     // By Custom trace: with vs without = 41 vs 58 ms [on COUNT = 10, exclude a first measure]
     @Test
-    @Repeat(times = COUNT+1)
+    @Repeat(times = 100+1)
     fun feedShown() {
         onView(ViewMatchers.withText(R.string.feed_announcement_title)).check(matches(isDisplayed()))
         /*pressBack()*/ //maybe there is need in close app.
@@ -137,9 +133,5 @@ class FeedScreenTest {
 
     fun supportBackPress() {
         idlingResources!!.getValue(TestType._Service).setIdleState(false)
-    }
-
-    companion object{
-        const val COUNT = 100
     }
 }

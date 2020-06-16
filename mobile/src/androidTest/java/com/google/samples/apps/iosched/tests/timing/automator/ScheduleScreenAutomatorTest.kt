@@ -23,26 +23,18 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
-import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
-import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import com.google.samples.apps.iosched.tests.timing.automator.FeedScreenAutomatorTest.Companion.BASIC_SAMPLE_PACKAGE
 import com.google.samples.apps.iosched.tests.timing.automator.FeedScreenAutomatorTest.Companion.LAUNCH_TIMEOUT
 import com.google.samples.apps.iosched.tests.timing.automator.FeedScreenAutomatorTest.Companion.waitAndClick
-import com.google.samples.apps.iosched.tests.timing.espresso.FeedScreenTest.Companion.COUNT
-import com.google.samples.apps.iosched.tests.ui.MainActivityTestRule
 import com.google.samples.apps.iosched.tests.ui.ScheduleTest
 import org.hamcrest.core.IsNull
-import org.junit.After
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import repeat.Repeat
-import repeat.RepeatRule
 import java.util.concurrent.TimeUnit
 
 /**
@@ -104,7 +96,7 @@ class ScheduleScreenAutomatorTest {
      */
     @Test
     fun clickOnFirstItem_detailsShown_v2() {
-        for (i in 0..COUNT) {
+        for (i in 0..100) {
             device.findObject(By.text("Google Keynote")).click()
 
             device.wait<UiObject2>(
