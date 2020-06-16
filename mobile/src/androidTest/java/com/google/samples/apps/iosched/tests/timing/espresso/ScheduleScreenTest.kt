@@ -53,10 +53,6 @@ class ScheduleScreenTest {
     @get:Rule
     var activityRule = MainActivityTestRule(R.id.navigation_schedule)
 
-    // Executes tasks in a synchronous [TaskScheduler]
-    @get:Rule
-    var syncTaskExecutorRule = SyncTaskExecutorRule() //TODO(delete this copy-paste)
-
     // Sets the preferences so no welcome screens are shown
     @get:Rule
     var preferencesRule = SetPreferencesRule()

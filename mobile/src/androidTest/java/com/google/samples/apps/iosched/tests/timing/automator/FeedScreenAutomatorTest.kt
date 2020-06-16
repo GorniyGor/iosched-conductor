@@ -136,9 +136,8 @@ class FeedScreenAutomatorTest {
      *
      * check Controller init
      */
-    //TODO(check with and without) | log "I/ActivityTaskManager: Displayed ... ms" (time) is written for case "without" only for first iteration
 
-    // By Custom trace: with vs without = 41 vs 58 ms [on COUNT = 10, exclude a first measure]
+    // By Custom trace: with vs without = 41 vs 58 ms [on emulator, on COUNT = 10, exclude a first measure]
     @Test
     @Repeat(times = 101)
     fun feedShown() {
