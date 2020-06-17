@@ -35,9 +35,11 @@ import com.google.samples.apps.iosched.model.ConferenceWifiInfo
 import com.google.samples.apps.iosched.shared.di.AssistantAppEnabledFlag
 import com.google.samples.apps.iosched.shared.util.TimeUtils
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.finishTraceForTest
 import com.google.samples.apps.iosched.widget.FadingSnackbar
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -85,6 +87,11 @@ class EventFragment : DaggerFragment() {
             val url = it?.getContentIfNotHandled() ?: return@Observer
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        finishTraceForTest(TestType.Feed_Info)
     }
 }
 

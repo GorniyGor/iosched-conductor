@@ -19,15 +19,18 @@ package com.google.samples.apps.iosched.ui.sessiondetail
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.VisibleForTesting
 import androidx.core.app.ShareCompat
 import androidx.core.net.toUri
 import androidx.core.view.forEach
 import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,6 +53,9 @@ import com.google.samples.apps.iosched.shared.result.EventObserver
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
 import com.google.samples.apps.iosched.shared.util.toEpochMilli
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
+import com.google.samples.apps.iosched.ui.MainActivity
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.getTraceNewInstance
 import com.google.samples.apps.iosched.ui.MainNavigationFragment
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
@@ -66,6 +72,7 @@ import com.google.samples.apps.iosched.ui.signin.NotificationsPreferenceDialogFr
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment.Companion.DIALOG_SIGN_IN
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.finishTraceForTest
 import com.google.samples.apps.iosched.util.openWebsiteUrl
 import com.google.samples.apps.iosched.util.postponeEnterTransition
 import timber.log.Timber
@@ -275,6 +282,10 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        finishTraceForTest(TestType.Schedule_Details)
+    }
     override fun onStop() {
         super.onStop()
         // Force a refresh when this screen gets added to a backstack and user comes back to it.
