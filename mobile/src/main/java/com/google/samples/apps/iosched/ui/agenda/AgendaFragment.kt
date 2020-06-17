@@ -29,37 +29,31 @@ import com.google.samples.apps.iosched.model.Block
 import com.google.samples.apps.iosched.shared.util.TimeUtils
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.signin.setupProfileMenuItem
 import com.google.samples.apps.iosched.util.clearDecorations
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
 import org.threeten.bp.ZoneId
 import javax.inject.Inject
 
-class AgendaFragment : MainNavigationFragment() {
+class AgendaFragment : MainNavigationController() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: AgendaViewModel
     private lateinit var binding: FragmentAgendaBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         binding = FragmentAgendaBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
         }
+        return binding.root
+    }
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
         // Pad the bottom of the RecyclerView so that the content scrolls up above the nav bar
         binding.recyclerView.doOnApplyWindowInsets { v, insets, padding ->
             v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
         }
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
 
         binding.viewModel = viewModel

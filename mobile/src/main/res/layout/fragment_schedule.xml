@@ -125,7 +125,7 @@
           ~ expands. However, marginTop pushes the sheet down from it's peekHeight when collapsed.
           ~ Using marginBottom achieves the desired effect.
           -->
-        <fragment
+        <include
             android:id="@+id/filter_sheet"
             android:name="com.google.samples.apps.iosched.ui.schedule.filters.ScheduleFilterFragment"
             android:layout_width="match_parent"
@@ -136,7 +136,7 @@
             app:behavior_hideable="true"
             app:behavior_peekHeight="@dimen/schedule_bottom_sheet_peek_height"
             app:behavior_skipCollapsed="true"
-            tools:layout="@layout/fragment_schedule_filter" />
+            layout="@layout/fragment_schedule_filter" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

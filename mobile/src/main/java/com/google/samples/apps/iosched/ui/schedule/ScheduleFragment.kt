@@ -27,12 +27,12 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePaddingRelative
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
+import com.bluelinelabs.conductor.RouterTransaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentScheduleBinding
@@ -45,12 +45,14 @@ import com.google.samples.apps.iosched.shared.domain.sessions.ConferenceDayIndex
 import com.google.samples.apps.iosched.shared.result.EventObserver
 import com.google.samples.apps.iosched.shared.util.TimeUtils
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
+import com.google.samples.apps.iosched.shared.util.requireActivity
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
 import com.google.samples.apps.iosched.ui.schedule.ScheduleFragmentDirections.Companion.toSearch
 import com.google.samples.apps.iosched.ui.schedule.ScheduleFragmentDirections.Companion.toSessionDetail
+import com.google.samples.apps.iosched.ui.schedule.filters.ScheduleFilterFragment
 import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.ui.signin.NotificationsPreferenceDialogFragment
 import com.google.samples.apps.iosched.ui.signin.NotificationsPreferenceDialogFragment.Companion.DIALOG_NOTIFICATIONS_PREFERENCE
@@ -61,6 +63,7 @@ import com.google.samples.apps.iosched.util.clearDecorations
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
 import com.google.samples.apps.iosched.util.executeAfter
 import com.google.samples.apps.iosched.util.fabVisibility
+import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.requestApplyInsetsWhenAttached
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior.BottomSheetCallback
@@ -76,7 +79,7 @@ import javax.inject.Named
 /**
  * The Schedule page of the top-level Activity.
  */
-class ScheduleFragment : MainNavigationFragment() {
+class ScheduleFragment(args: Bundle?) : MainNavigationController(args) {
 
     companion object {
         private const val DIALOG_NEED_TO_SIGN_IN = "dialog_need_to_sign_in"
@@ -118,36 +121,33 @@ class ScheduleFragment : MainNavigationFragment() {
 
     private lateinit var binding: FragmentScheduleBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
+        binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
+        //FROM onCreate--------------------
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             onBackPressed()
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        //FROM onCreateView----------------
         // ViewModel shared with child fragments.
         scheduleViewModel = viewModelProvider(viewModelFactory)
-        binding = FragmentScheduleBinding.inflate(inflater, container, false).apply {
+        binding.executeAfter {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@ScheduleFragment.scheduleViewModel
         }
+
+        getChildRouter(view.findViewById(R.id.filter_sheet))
+            .setRoot(RouterTransaction.with(ScheduleFilterFragment()))
 
         filtersFab = binding.filterFab
         snackbar = binding.snackbar
         scheduleRecyclerView = binding.recyclerviewSchedule
         dayIndicatorRecyclerView = binding.includeScheduleAppbar.dayIndicators
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+        //----------------
         // Set up search menu item
         binding.includeScheduleAppbar.toolbar.run {
             inflateMenu(R.menu.schedule_menu)
@@ -168,7 +168,8 @@ class ScheduleFragment : MainNavigationFragment() {
         setUpSnackbar(scheduleViewModel.snackBarMessage, snackbar, snackbarMessageManager,
             actionClickListener = {
                 snackbarPrefViewModel.onStopClicked()
-            }
+            },
+            context = view.context
         )
 
         binding.includeScheduleAppbar.toolbar.setupProfileMenuItem(
@@ -280,7 +281,7 @@ class ScheduleFragment : MainNavigationFragment() {
         // Show an error message
         scheduleViewModel.errorMessage.observe(this, EventObserver { errorMsg ->
             // TODO: Change once there's a way to show errors to the user
-            Toast.makeText(this.context, errorMsg, Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, errorMsg, Toast.LENGTH_LONG).show()
         })
 
         if (savedInstanceState == null) {
@@ -292,7 +293,7 @@ class ScheduleFragment : MainNavigationFragment() {
             }, 500)
 
             // Process arguments to set initial filters
-            arguments?.let {
+            args.let {
                 if (ScheduleFragmentArgs.fromBundle(it).showPinnedEvents) {
                     scheduleViewModel.clearFilters()
                     scheduleViewModel.showPinnedEvents()
@@ -367,7 +368,7 @@ class ScheduleFragment : MainNavigationFragment() {
         fabVisibility(filtersFab, showFab)
         // Set snackbar position depending whether fab/filters show.
         snackbar.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-            bottomMargin = resources.getDimensionPixelSize(
+            bottomMargin = resources!!.getDimensionPixelSize(
                 if (showFab) {
                     R.dimen.snackbar_margin_bottom_fab
                 } else {

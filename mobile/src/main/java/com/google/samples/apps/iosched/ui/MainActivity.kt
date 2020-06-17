@@ -19,6 +19,7 @@ package com.google.samples.apps.iosched.ui
 import android.app.Activity
 import android.content.Intent
 import android.net.ConnectivityManager
+import androidx.activity.addCallback
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -26,17 +27,18 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.samples.apps.iosched.R
+import com.google.samples.apps.iosched.R.id
 import com.google.samples.apps.iosched.ar.ArActivity
 import com.google.samples.apps.iosched.databinding.NavigationHeaderBinding
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsActions
@@ -59,6 +61,7 @@ import com.google.samples.apps.iosched.util.signin.FirebaseAuthErrorCodeConverte
 import com.google.samples.apps.iosched.util.updateForTheme
 import com.google.samples.apps.iosched.widget.HashtagIoDecoration
 import com.google.samples.apps.iosched.widget.NavigationBarContentFrameLayout
+import com.google.samples.apps.iosched.widget.conductor.ConductorNavHost
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import java.util.UUID
@@ -120,7 +123,7 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
     private lateinit var navigation: NavigationView
     private lateinit var navHeaderBinding: NavigationHeaderBinding
     private lateinit var navController: NavController
-    private var navHostFragment: NavHostFragment? = null
+    private var navHostFragment: ConductorNavHost? = null
 
     private lateinit var statusScrim: View
 
@@ -172,11 +175,10 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         navHeaderBinding = NavigationHeaderBinding.inflate(layoutInflater).apply {
             lifecycleOwner = this@MainActivity
         }
-
-        navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-
-        navController = findNavController(R.id.nav_host_fragment)
+        navHostFragment =
+            ConductorNavHost(
+                this, findViewById(id.view_container), savedInstanceState)
+        navController = findNavController(R.id.view_container)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             currentNavId = destination.id
             val isTopLevelDestination = TOP_LEVEL_DESTINATIONS.contains(destination.id)
@@ -261,6 +263,9 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
             Timber.d("Signed in user can demo ar = $it")
             canSignedInUserDemoAr = it
         })
+        onBackPressedDispatcher.addCallback(this){
+            navController.popBackStack()
+        }
     }
 
     override fun registerToolbarWithNavigation(toolbar: Toolbar) {
@@ -289,6 +294,10 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+    }
+
     override fun onBackPressed() {
         /**
          * If the drawer is open, the behavior changes based on the API level.
@@ -311,10 +320,8 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         getCurrentFragment()?.onUserInteraction()
     }
 
-    private fun getCurrentFragment(): MainNavigationFragment? {
-        return navHostFragment
-            ?.childFragmentManager
-            ?.primaryNavigationFragment as? MainNavigationFragment
+    private fun getCurrentFragment(): MainNavigationController? {
+        return navHostFragment?.router?.backstack?.let { it[it.size-1].controller } as? MainNavigationController
     }
 
     private fun navigateTo(navId: Int) {

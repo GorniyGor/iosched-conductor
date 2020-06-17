@@ -17,7 +17,6 @@
 package com.google.samples.apps.iosched.ui.sessioncommon
 
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.iosched.shared.di.FragmentScoped
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -29,12 +28,12 @@ import javax.inject.Named
 @Module
 internal class SessionViewPoolModule {
 
-    @FragmentScoped
+//    @FragmentScoped
     @Provides
     @Named("sessionViewPool")
     fun providesSessionViewPool(): RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
 
-    @FragmentScoped
+//    @FragmentScoped
     @Provides
     @Named("tagViewPool")
     fun providesTagViewPool(): RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()

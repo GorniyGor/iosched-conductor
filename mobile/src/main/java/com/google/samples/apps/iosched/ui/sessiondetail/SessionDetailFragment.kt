@@ -24,6 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.postponeEnterTransition
 import androidx.core.app.ShareCompat
 import androidx.core.net.toUri
 import androidx.core.view.forEach
@@ -32,9 +33,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
-import androidx.transition.TransitionInflater
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.R.style
 import com.google.samples.apps.iosched.databinding.FragmentSessionDetailBinding
@@ -48,9 +47,13 @@ import com.google.samples.apps.iosched.shared.domain.users.SwapRequestParameters
 import com.google.samples.apps.iosched.shared.notifications.AlarmBroadcastReceiver
 import com.google.samples.apps.iosched.shared.result.EventObserver
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
+import com.google.samples.apps.iosched.shared.util.requireActivity
+import com.google.samples.apps.iosched.shared.util.requireContext
+import com.google.samples.apps.iosched.shared.util.requireFragmentManager
 import com.google.samples.apps.iosched.shared.util.toEpochMilli
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainActivity
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
 import com.google.samples.apps.iosched.ui.reservation.RemoveReservationDialogFragment
@@ -66,13 +69,13 @@ import com.google.samples.apps.iosched.ui.signin.NotificationsPreferenceDialogFr
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment.Companion.DIALOG_SIGN_IN
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.openWebsiteUrl
-import com.google.samples.apps.iosched.util.postponeEnterTransition
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
-class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.Listener {
+class SessionDetailFragment(args: Bundle?) : MainNavigationController(args), SessionFeedbackFragment.Listener {
 
     private var shareString = ""
 
@@ -99,17 +102,14 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
 
     private lateinit var binding: FragmentSessionDetailBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         sessionDetailViewModel = viewModelProvider(viewModelFactory)
-
-        sharedElementReturnTransition =
-            TransitionInflater.from(context).inflateTransition(R.transition.speaker_shared_enter)
+        //TODO( fragment animation methods )
+        /*sharedElementReturnTransition =
+            TransitionInflater.from(container.context).inflateTransition(R.transition.speaker_shared_enter)
         // Delay the enter transition until speaker image has loaded.
-        postponeEnterTransition(500L)
+        postponeEnterTransition(500L)*/
+        postponeEnterTransition(activity!!)
 
         val themedInflater =
             inflater.cloneInContext(ContextThemeWrapper(requireActivity(), style.AppTheme_Detail))
@@ -191,7 +191,7 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
             shareString = if (it == null) {
                 ""
             } else {
-                getString(R.string.share_text_session_detail, it.title, it.sessionUrl)
+                resources?.getString(R.string.share_text_session_detail, it.title, it.sessionUrl)?:""
             }
         })
 
@@ -211,12 +211,12 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
             snackbarMessageManager,
             actionClickListener = {
                 snackbarPreferenceViewModel.onStopClicked()
-            }
+            }, context = container.context
         )
 
         sessionDetailViewModel.errorMessage.observe(this, EventObserver { errorMsg ->
             // TODO: Change once there's a way to show errors to the user
-            Toast.makeText(this.context, errorMsg, Toast.LENGTH_LONG).show()
+            Toast.makeText(container.context, errorMsg, Toast.LENGTH_LONG).show()
         })
 
         sessionDetailViewModel.navigateToSignInDialogAction.observe(this, EventObserver {
@@ -246,11 +246,11 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
         })
 
         // When opened from the post session notification, open the feedback dialog
-        requireNotNull(arguments).apply {
+        requireNotNull(args).apply {
             val sessionId = getString(EXTRA_SESSION_ID)
                     ?: SessionDetailFragmentArgs.fromBundle(this).sessionId
             val openRateSession =
-                arguments?.getBoolean(AlarmBroadcastReceiver.EXTRA_SHOW_RATE_SESSION_FLAG) ?: false
+                args.getBoolean(AlarmBroadcastReceiver.EXTRA_SHOW_RATE_SESSION_FLAG) ?: false
             sessionDetailViewModel.showFeedbackButton.observe(this@SessionDetailFragment, Observer {
                 if (it == true && openRateSession) {
                     openFeedbackDialog(sessionId)
@@ -260,11 +260,12 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.d("Loading details for session $arguments")
+    override fun onAttach(view: View) {
+        super.onAttach(view)
+        //from onStart
+        Timber.d("Loading details for session $args")
 
-        requireNotNull(arguments).apply {
+        args.apply {
             // TODO(benbaxter): Only use SessionDetailFragmentArgs and delete SessionDetailActivity.
             // Default with the value passed from the activity, otherwise assume the fragment was
             // added from the navigation controller.
@@ -273,16 +274,15 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
 
             sessionDetailViewModel.setSessionId(sessionId)
         }
+        //----
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDetach(view: View) {
         // Force a refresh when this screen gets added to a backstack and user comes back to it.
         sessionDetailViewModel.setSessionId(null)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
 
         // Observing the changes from Fragment because data binding doesn't work with menu items.
         val menu = binding.sessionDetailBottomAppBar.menu
@@ -368,8 +368,8 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
             .putExtra(CalendarContract.Events.TITLE, session.title)
             .putExtra(CalendarContract.Events.EVENT_LOCATION, session.room?.name)
             .putExtra(CalendarContract.Events.DESCRIPTION, session.getCalendarDescription(
-                getString(R.string.paragraph_delimiter),
-                getString(R.string.speaker_delimiter)
+                resources?.getString(R.string.paragraph_delimiter)?:"",
+                resources?.getString(R.string.speaker_delimiter)?:""
             ))
             .putExtra(
                 CalendarContract.EXTRA_EVENT_BEGIN_TIME,
@@ -386,7 +386,7 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
 
     private fun openFeedbackDialog(sessionId: String) {
         SessionFeedbackFragment.createInstance(sessionId)
-            .show(childFragmentManager, FRAGMENT_SESSION_FEEDBACK)
+            .show(requireFragmentManager(), FRAGMENT_SESSION_FEEDBACK)
     }
 
     companion object {
@@ -399,7 +399,7 @@ class SessionDetailFragment : MainNavigationFragment(), SessionFeedbackFragment.
                 putString(EXTRA_SESSION_ID, sessionId)
                 putBoolean(AlarmBroadcastReceiver.EXTRA_SHOW_RATE_SESSION_FLAG, openRateSession)
             }
-            return SessionDetailFragment().apply { arguments = bundle }
+            return SessionDetailFragment(bundle)
         }
     }
 }

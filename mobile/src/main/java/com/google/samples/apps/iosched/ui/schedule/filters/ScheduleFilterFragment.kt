@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentScheduleFilterBinding
 import com.google.samples.apps.iosched.shared.util.parentViewModelProvider
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.schedule.ScheduleViewModel
 import com.google.samples.apps.iosched.ui.schedule.filters.EventFilter.MyEventsFilter
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
@@ -51,13 +52,12 @@ import com.google.samples.apps.iosched.widget.BottomSheetBehavior.Companion.STAT
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior.Companion.STATE_EXPANDED
 import com.google.samples.apps.iosched.widget.BottomSheetBehavior.Companion.STATE_HIDDEN
 import com.google.samples.apps.iosched.widget.SpaceDecoration
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 /**
  * Fragment that shows the list of filters for the Schedule
  */
-class ScheduleFilterFragment : DaggerFragment() {
+class ScheduleFilterFragment : MainNavigationController() {
 
     companion object {
         // Threshold for when normal header views and description views should "change places".
@@ -95,13 +95,27 @@ class ScheduleFilterFragment : DaggerFragment() {
 
     private val contentFadeInterpolator = LinearOutSlowInInterpolator()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentScheduleFilterBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
+        behavior = BottomSheetBehavior.from(container)
+        // Update the peek and margins so that it scrolls and rests within sys ui
+        val peekHeight = behavior.peekHeight
+        val marginBottom = container.marginBottom
+        container.doOnApplyWindowInsets { v, insets, _ ->
+            val gestureInsets = insets.systemGestureInsets
+            // Update the peek height so that it is above the navigation bar
+            behavior.peekHeight = gestureInsets.bottom + peekHeight
+
+            v.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = marginBottom + insets.systemWindowInsetTop
+            }
+        }
+
+        return inflater.inflate(R.layout.fragment_schedule_filter, container, false)
+    }
+
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
+        binding = FragmentScheduleFilterBinding.bind(view).apply {
+            lifecycleOwner = this@ScheduleFilterFragment
             headerAlpha = this@ScheduleFilterFragment.headerAlpha
             descriptionAlpha = this@ScheduleFilterFragment.descriptionAlpha
             recyclerviewAlpha = this@ScheduleFilterFragment.recyclerviewAlpha
@@ -112,16 +126,10 @@ class ScheduleFilterFragment : DaggerFragment() {
             v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
         }
 
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        //onActivityCreated------
         // ViewModel is scoped to the parent fragment.
         viewModel = parentViewModelProvider(viewModelFactory)
         binding.viewModel = viewModel
-
-        behavior = BottomSheetBehavior.from(binding.filterSheet)
 
         filterAdapter = ScheduleFilterAdapter(viewModel)
         viewModel.eventFilters.observe(this, Observer { filterAdapter.submitEventFilterList(it) })
@@ -136,19 +144,6 @@ class ScheduleFilterFragment : DaggerFragment() {
                     binding.filtersHeaderShadow.isActivated = recyclerView.canScrollVertically(-1)
                 }
             })
-        }
-
-        // Update the peek and margins so that it scrolls and rests within sys ui
-        val peekHeight = behavior.peekHeight
-        val marginBottom = binding.root.marginBottom
-        binding.root.doOnApplyWindowInsets { v, insets, _ ->
-            val gestureInsets = insets.systemGestureInsets
-            // Update the peek height so that it is above the navigation bar
-            behavior.peekHeight = gestureInsets.bottom + peekHeight
-
-            v.updateLayoutParams<MarginLayoutParams> {
-                bottomMargin = marginBottom + insets.systemWindowInsetTop
-            }
         }
 
         behavior.addBottomSheetCallback(object : BottomSheetCallback {

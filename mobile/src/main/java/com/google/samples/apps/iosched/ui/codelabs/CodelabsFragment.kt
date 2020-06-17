@@ -24,7 +24,6 @@ import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
 import com.google.samples.apps.iosched.databinding.FragmentCodelabsBinding
 import com.google.samples.apps.iosched.model.Codelab
@@ -32,15 +31,18 @@ import com.google.samples.apps.iosched.shared.analytics.AnalyticsActions
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsHelper
 import com.google.samples.apps.iosched.shared.di.MapFeatureEnabledFlag
 import com.google.samples.apps.iosched.shared.util.activityViewModelProvider
+import com.google.samples.apps.iosched.shared.util.requireActivity
+import com.google.samples.apps.iosched.shared.util.requireContext
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.signin.setupProfileMenuItem
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.openWebsiteUri
 import javax.inject.Inject
 import javax.inject.Named
 
-class CodelabsFragment : MainNavigationFragment(), CodelabsActionsHandler {
+class CodelabsFragment : MainNavigationController(), CodelabsActionsHandler {
 
     companion object {
         private const val CODELABS_WEBSITE = "https://codelabs.developers.google.com"
@@ -67,17 +69,12 @@ class CodelabsFragment : MainNavigationFragment(), CodelabsActionsHandler {
     private lateinit var codelabsViewModel: CodelabsViewModel
     private lateinit var codelabsAdapter: CodelabsAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         binding = FragmentCodelabsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
         binding.toolbar.setupProfileMenuItem(activityViewModelProvider(viewModelFactory), this)
 
         codelabsAdapter = CodelabsAdapter(

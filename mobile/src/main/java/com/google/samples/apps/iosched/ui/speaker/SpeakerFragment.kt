@@ -21,34 +21,35 @@ import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.postponeEnterTransition
+import androidx.core.app.ActivityCompat.startPostponedEnterTransition
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
-import androidx.transition.TransitionInflater
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.databinding.FragmentSpeakerBinding
 import com.google.samples.apps.iosched.shared.analytics.AnalyticsHelper
 import com.google.samples.apps.iosched.shared.result.EventObserver
+import com.google.samples.apps.iosched.shared.util.requireActivity
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
-import com.google.samples.apps.iosched.ui.MainNavigationFragment
+import com.google.samples.apps.iosched.ui.MainNavigationController
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
 import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.speaker.SpeakerFragmentDirections.Companion.toSessionDetail
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
-import com.google.samples.apps.iosched.util.postponeEnterTransition
+import com.google.samples.apps.iosched.util.findNavController
 import javax.inject.Inject
 import javax.inject.Named
 
 /**
  * Fragment displaying speaker details and their events.
  */
-class SpeakerFragment : MainNavigationFragment(), OnOffsetChangedListener {
+class SpeakerFragment(args: Bundle?) : MainNavigationController(args), OnOffsetChangedListener {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -66,26 +67,24 @@ class SpeakerFragment : MainNavigationFragment(), OnOffsetChangedListener {
 
     private var toolbarCollapsed = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         speakerViewModel = viewModelProvider(viewModelFactory)
-        speakerViewModel.setSpeakerId(SpeakerFragmentArgs.fromBundle(requireArguments()).speakerId)
+        speakerViewModel.setSpeakerId(SpeakerFragmentArgs.fromBundle(args).speakerId)
 
-        sharedElementEnterTransition =
+        //TODO( fragment animation methods )
+        /*sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(R.transition.speaker_shared_enter)
         // Delay the enter transition until speaker image has loaded.
-        postponeEnterTransition(500L)
+        postponeEnterTransition(500L)*/
+        postponeEnterTransition(activity!!)
 
         val imageLoadListener = object : ImageLoadListener {
             override fun onImageLoaded() {
-                startPostponedEnterTransition()
+                startPostponedEnterTransition(activity!!)
             }
 
             override fun onImageLoadFailed() {
-                startPostponedEnterTransition()
+                startPostponedEnterTransition(activity!!)
             }
         }
 
@@ -100,7 +99,7 @@ class SpeakerFragment : MainNavigationFragment(), OnOffsetChangedListener {
         // If speaker does not have a profile image to load, we need to resume.
         speakerViewModel.hasNoProfileImage.observe(this, Observer {
             if (it == true) {
-                startPostponedEnterTransition()
+                startPostponedEnterTransition(activity!!)
             }
         })
 
@@ -123,7 +122,7 @@ class SpeakerFragment : MainNavigationFragment(), OnOffsetChangedListener {
             snackbarMessageManager,
             actionClickListener = {
                 snackbarPrefViewModel.onStopClicked()
-            }
+            }, context = container.context
         )
         val speakerAdapter = SpeakerAdapter(
             viewLifecycleOwner,
@@ -154,8 +153,7 @@ class SpeakerFragment : MainNavigationFragment(), OnOffsetChangedListener {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewBound(view: View, savedInstanceState: Bundle?) {
 
         speakerViewModel.speaker.observe(this, Observer {
             if (it != null) {

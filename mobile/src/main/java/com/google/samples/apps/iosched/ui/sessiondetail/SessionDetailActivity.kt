@@ -22,18 +22,20 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bluelinelabs.conductor.Conductor
+import com.bluelinelabs.conductor.Router
+import com.bluelinelabs.conductor.RouterTransaction
 import com.firebase.ui.auth.IdpResponse
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.model.SessionId
 import com.google.samples.apps.iosched.shared.notifications.AlarmBroadcastReceiver
-import com.google.samples.apps.iosched.shared.util.inTransaction
+import com.google.samples.apps.iosched.shared.notifications.AlarmBroadcastReceiver.Companion.QUERY_SESSION_ID
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
 import com.google.samples.apps.iosched.ui.SnackbarMessage
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.theme.ThemeViewModel
 import com.google.samples.apps.iosched.util.signin.FirebaseAuthErrorCodeConverter
 import com.google.samples.apps.iosched.util.updateForTheme
-import com.google.samples.apps.iosched.shared.notifications.AlarmBroadcastReceiver.Companion.QUERY_SESSION_ID
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import java.util.UUID
@@ -45,6 +47,7 @@ class SessionDetailActivity : DaggerAppCompatActivity() {
     lateinit var snackbarMessageManager: SnackbarMessageManager
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    private var router: Router? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,14 +65,22 @@ class SessionDetailActivity : DaggerAppCompatActivity() {
             finish()
         } else {
             if (savedInstanceState == null) {
-                supportFragmentManager.inTransaction {
-                    add(R.id.session_detail_container,
-                        SessionDetailFragment.newInstance(sessionId, openRateSession))
+                router = Conductor.attachRouter(this, findViewById(R.id.session_detail_container), savedInstanceState)
+                if (!router!!.hasRootController()) {
+                    router!!.setRoot(RouterTransaction.with(
+                        SessionDetailFragment.newInstance(sessionId, openRateSession)
+                    ))
                 }
             }
         }
 
         viewModel.theme.observe(this, Observer(::updateForTheme))
+    }
+
+    override fun onBackPressed() {
+        if (router == null || !router!!.handleBack()) {
+            super.onBackPressed()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

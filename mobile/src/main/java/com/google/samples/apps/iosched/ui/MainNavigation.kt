@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,14 @@
 
 package com.google.samples.apps.iosched.ui
 
-import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.LifecycleOwner
 import com.google.samples.apps.iosched.R
-import dagger.android.support.DaggerFragment
+import com.google.samples.apps.iosched.di.DaggerController
 
 /**
  * To be implemented by components that host top-level navigation destinations.
@@ -42,32 +44,39 @@ interface NavigationDestination {
 }
 
 /**
- * Fragment representing a main navigation destination. This class handles wiring up the [Toolbar]
- * navigation icon if the fragment is attached to a [NavigationHost].
+ * Controller representing a main navigation destination. This class handles wiring up the [Toolbar]
+ * navigation icon if the controller is attached to a [NavigationHost].
  */
-open class MainNavigationFragment : DaggerFragment(), NavigationDestination {
+//TODO( may be reflection bug because there is defined one constructor for Java )
+abstract class MainNavigationController(args: Bundle? = null) : DaggerController(args), NavigationDestination {
 
+    protected val viewLifecycleOwner: LifecycleOwner = this
     protected var navigationHost: NavigationHost? = null
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is NavigationHost) {
-            navigationHost = context
-        }
+    protected abstract fun inflateView( inflater: LayoutInflater,  container: ViewGroup ): View
+    protected open fun onViewBound(view: View, savedInstanceState: Bundle? = null) {}
+
+    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View {
+        if (activity is NavigationHost) navigationHost = activity as NavigationHost
+        inject()
+        val view = inflateView(inflater, container)
+        onViewBound(view, savedViewState)
+        return view
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        navigationHost = null
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onAttach(view: View) {
+        super.onAttach(view)
         // If we have a toolbar and we are attached to a proper navigation host, set up the toolbar
         // navigation icon.
-        val host = navigationHost ?: return
-        val mainToolbar: Toolbar = view.findViewById(R.id.toolbar) ?: return
-        mainToolbar.apply {
-            host.registerToolbarWithNavigation(this)
+        navigationHost?.also { host ->
+            view.findViewById<Toolbar>(R.id.toolbar)?.apply {
+                host.registerToolbarWithNavigation(this)
+            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navigationHost = null
     }
 }

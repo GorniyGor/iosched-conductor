@@ -195,6 +195,10 @@ dependencies {
     implementation "com.google.code.gson:gson:$gsonVersion"
 
     implementation "com.google.ar:core:$rootProject.arcoreVersion"
+
+    implementation 'com.bluelinelabs:conductor:3.0.0-rc5'
+    implementation 'com.bluelinelabs:conductor-archlifecycle:3.0.0-rc5'
+    implementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 }
 
 apply plugin: 'com.google.gms.google-services'
