@@ -1,0 +1,3 @@
+for cutting video gpu bars tests: https://online-video-cutter.com/ru/
+for converting video to list pictures: https://www.onlineconverter.com/video-to-jpg
+for convert .ipynb to pdf: https://htmtopdf.herokuapp.com/ipynbviewer/#

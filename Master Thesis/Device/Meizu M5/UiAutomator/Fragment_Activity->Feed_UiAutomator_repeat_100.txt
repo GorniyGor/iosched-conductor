@@ -1,0 +1,303 @@
+File - unknown
+
+1 06-15 01:29:59.806 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.45528360479098007 144ms
+2 06-15 01:30:06.062 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.9143530801808616 59ms
+3 06-15 01:30:12.184 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.022666704956440853 61ms
+4 06-15 01:30:18.337 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.03672676405322073 80ms
+5 06-15 01:30:24.485 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.6370402743523463 53ms
+6 06-15 01:30:30.631 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.9314332442466725 56ms
+7 06-15 01:30:36.761 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.855457799454236 54ms
+8 06-15 01:30:42.938 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.8398521367690059 62ms
+9 06-15 01:30:49.049 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.4614171618614884 53ms
+10 06-15 01:30:55.174 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.8702721684555876 56ms
+11 06-15 01:31:01.338 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.9377283283093126 59ms
+12 06-15 01:31:07.458 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.35056156298232777 52ms
+13 06-15 01:31:13.592 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.5894643200288142 53ms
+14 06-15 01:31:19.751 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.10109355164478484 52ms
+15 06-15 01:31:25.898 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.7673854091845046 53ms
+16 06-15 01:31:32.021 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.7404281314313023 52ms
+17 06-15 01:31:38.173 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric Page 1 of 7
+
+File - unknown
+
+17 BETWEEN_SCREEN:Activity_Feed:0.7079198709300293 60ms
+18 06-15 01:31:44.325 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.4545386910597973 61ms
+19 06-15 01:31:50.472 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.726322943450845 75ms
+20 06-15 01:31:56.588 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.16133663953632682 54ms
+21 06-15 01:32:02.724 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.46584217663813765 57ms
+22 06-15 01:32:08.878 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.12827355121152118 83ms
+23 06-15 01:32:15.011 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.724033895016519 52ms
+24 06-15 01:32:21.162 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.9348956767651251 66ms
+25 06-15 01:32:27.278 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.9198756016598253 53ms
+26 06-15 01:32:33.406 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.1880217099833994 53ms
+27 06-15 01:32:39.532 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.4196959031578995 52ms
+28 06-15 01:32:45.664 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.7089714329945916 52ms
+29 06-15 01:32:51.789 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.8595183744874445 60ms
+30 06-15 01:32:57.959 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.5248706644344605 66ms
+31 06-15 01:33:04.100 9465-9499/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Activity_Feed:0.9551333997276491 52ms
+32 06-15 01:33:10.232 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+055007246300944 52ms
+33 06-15 01:33:16.351 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5136435947491922 53ms
+34 06-15 01:33:22.489 9465-9499/? I/FirebasePerformance:
+Page 2 of 7
+
+File - unknown
+
+34 Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+42464327111098343 55ms
+35 06-15 01:33:28.638 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+901567787091298 58ms
+36 06-15 01:33:34.751 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+03936195040912294 53ms
+37 06-15 01:33:40.883 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+8006577152725278 59ms
+38 06-15 01:33:47.014 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9803221040084893 52ms
+39 06-15 01:33:53.157 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9248249099179938 57ms
+40 06-15 01:33:59.278 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6427213578837223 53ms
+41 06-15 01:34:05.818 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4770627985091599 53ms
+42 06-15 01:34:11.917 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4349595107040325 53ms
+43 06-15 01:34:18.078 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5066766473720354 62ms
+44 06-15 01:34:24.211 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5237070106578371 54ms
+45 06-15 01:34:30.322 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+2628229016687966 53ms
+46 06-15 01:34:36.440 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+18020165352483242 52ms
+47 06-15 01:34:42.582 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9242515881681206 52ms
+48 06-15 01:34:48.717 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5261266861321771 56ms
+49 06-15 01:34:54.877 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+27681653971914233 56ms
+50 06-15 01:35:00.993 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5544998395553324 53ms
+Page 3 of 7
+
+File - unknown
+
+51 06-15 01:35:07.152 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5849574160859895 78ms
+52 06-15 01:35:13.283 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5138818115148654 53ms
+53 06-15 01:35:19.436 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9017907059738757 63ms
+54 06-15 01:35:25.595 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+7852780585955778 81ms
+55 06-15 01:35:31.716 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+7411152749241761 52ms
+56 06-15 01:35:37.830 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5833666447138166 57ms
+57 06-15 01:35:43.964 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5156144607798229 55ms
+58 06-15 01:35:50.088 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4007708336892415 56ms
+59 06-15 01:35:56.250 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5665147296647807 77ms
+60 06-15 01:36:02.372 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+45026509191498243 52ms
+61 06-15 01:36:08.530 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+3742632540557952 69ms
+62 06-15 01:36:14.723 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+19994082568497906 65ms
+63 06-15 01:36:20.842 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5663547894496964 52ms
+64 06-15 01:36:26.983 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+8359707124755221 53ms
+65 06-15 01:36:33.103 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+3118472283962308 53ms
+66 06-15 01:36:39.229 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4128308085556821 53ms
+67 06-15 01:36:45.376 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+Page 4 of 7
+
+File - unknown
+
+67 31254562253081786 54ms
+68 06-15 01:36:51.541 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9884261802157326 53ms
+69 06-15 01:36:57.687 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+8341306171558095 64ms
+70 06-15 01:37:03.792 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+00890019721958557 52ms
+71 06-15 01:37:09.949 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+548101902949513 55ms
+72 06-15 01:37:16.077 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+06299876629356504 52ms
+73 06-15 01:37:22.208 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6243709681619157 53ms
+74 06-15 01:37:28.338 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+21734148952468269 63ms
+75 06-15 01:37:34.482 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+7873679649745717 80ms
+76 06-15 01:37:40.594 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9610782229861173 52ms
+77 06-15 01:37:46.737 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+453940922721333 61ms
+78 06-15 01:37:52.851 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+2110671514025484 56ms
+79 06-15 01:37:58.991 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6530714865452079 53ms
+80 06-15 01:38:05.106 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+37740470213340493 54ms
+81 06-15 01:38:11.251 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9950770569370678 52ms
+82 06-15 01:38:17.421 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5750030462019764 61ms
+83 06-15 01:38:23.562 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+33671128391662697 54ms
+84 06-15 01:38:29.725 9465-9499/? I/FirebasePerformance:
+Page 5 of 7
+
+File - unknown
+
+84 Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+24170360945393032 54ms
+85 06-15 01:38:35.840 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+06923400545468006 52ms
+86 06-15 01:38:41.951 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6295198302257037 53ms
+87 06-15 01:38:48.113 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+745541923274354 53ms
+88 06-15 01:38:54.226 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4560253911163237 53ms
+89 06-15 01:39:00.342 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+43190399642348953 53ms
+90 06-15 01:39:06.492 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9112785382940344 53ms
+91 06-15 01:39:12.624 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+10742592347894087 53ms
+92 06-15 01:39:18.792 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+8262581618120828 61ms
+93 06-15 01:39:24.924 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+29339553245941663 54ms
+94 06-15 01:39:31.086 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+1264627730960035 62ms
+95 06-15 01:39:37.192 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+0440821899354461 53ms
+96 06-15 01:39:43.339 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+364601512853562 53ms
+97 06-15 01:39:49.468 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4049473947100405 53ms
+98 06-15 01:39:55.646 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6853143162145214 57ms
+99 06-15 01:40:01.761 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+39376698285218426 53ms
+100 06-15 01:40:07.889 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6993601735712333 53ms
+Page 6 of 7
+
+File - unknown
+
+101 06-15 01:40:14.015 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+7006869009636897 56ms
+102
+
+Page 7 of 7
+
+

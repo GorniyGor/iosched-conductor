@@ -1,0 +1,155 @@
+File - unknown
+
+1 06-15 01:38:17.250 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4974ms
+2 06-15 01:38:17.421 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+5750030462019764 61ms
+3 06-15 01:38:18.440 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1189ms
+4 06-15 01:38:23.389 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4949ms
+5 06-15 01:38:23.562 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+33671128391662697 54ms
+6 06-15 01:38:24.604 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1215ms
+7 06-15 01:38:29.551 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4946ms
+8 06-15 01:38:29.725 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+24170360945393032 54ms
+9 06-15 01:38:30.718 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1166ms
+10 06-15 01:38:35.675 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4957ms
+11 06-15 01:38:35.840 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+06923400545468006 52ms
+12 06-15 01:38:36.847 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1172ms
+13 06-15 01:38:41.791 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4943ms
+14 06-15 01:38:41.951 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6295198302257037 53ms
+15 06-15 01:38:42.978 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1187ms
+16 06-15 01:38:47.920 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4941ms
+17 06-15 01:38:48.113 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+745541923274354 53ms
+18 06-15 01:38:49.110 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1190ms
+19 06-15 01:38:54.054 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4943ms
+20 06-15 01:38:54.226 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4560253911163237 53ms
+21 06-15 01:38:55.237 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1183ms
+22 06-15 01:39:00.185 9465-9499/? I/FirebasePerformance:
+Page 1 of 3
+
+File - unknown
+
+22 Logging TraceMetric - _bs 4948ms
+23 06-15 01:39:00.342 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+43190399642348953 53ms
+24 06-15 01:39:01.367 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1181ms
+25 06-15 01:39:06.315 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4947ms
+26 06-15 01:39:06.492 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+9112785382940344 53ms
+27 06-15 01:39:07.515 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1200ms
+28 06-15 01:39:12.461 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4946ms
+29 06-15 01:39:12.624 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+10742592347894087 53ms
+30 06-15 01:39:13.627 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1165ms
+31 06-15 01:39:18.598 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4970ms
+32 06-15 01:39:18.792 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+8262581618120828 61ms
+33 06-15 01:39:19.809 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1211ms
+34 06-15 01:39:24.758 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4948ms
+35 06-15 01:39:24.924 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+29339553245941663 54ms
+36 06-15 01:39:25.957 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1198ms
+37 06-15 01:39:30.900 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4942ms
+38 06-15 01:39:31.086 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+1264627730960035 62ms
+39 06-15 01:39:32.072 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1172ms
+40 06-15 01:39:37.029 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4954ms
+41 06-15 01:39:37.192 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+0440821899354461 53ms
+42 06-15 01:39:38.216 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1189ms
+43 06-15 01:39:43.163 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4946ms
+Page 2 of 3
+
+File - unknown
+
+44 06-15 01:39:43.339 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+364601512853562 53ms
+45 06-15 01:39:44.329 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1165ms
+46 06-15 01:39:49.296 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4966ms
+47 06-15 01:39:49.468 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+4049473947100405 53ms
+48 06-15 01:39:50.476 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1180ms
+49 06-15 01:39:55.445 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4968ms
+50 06-15 01:39:55.646 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6853143162145214 57ms
+51 06-15 01:39:56.658 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1213ms
+52 06-15 01:40:01.593 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4934ms
+53 06-15 01:40:01.761 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+39376698285218426 53ms
+54 06-15 01:40:02.771 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1178ms
+55 06-15 01:40:07.719 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4947ms
+56 06-15 01:40:07.889 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+6993601735712333 53ms
+57 06-15 01:40:08.902 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1182ms
+58 06-15 01:40:13.848 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _bs 4945ms
+59 06-15 01:40:14.015 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - BETWEEN_SCREEN:Activity_Feed:0.
+7006869009636897 56ms
+60 06-15 01:40:15.015 9465-9499/? I/FirebasePerformance:
+Logging TraceMetric - _fs 1166ms
+61
+
+Page 3 of 3
+
+

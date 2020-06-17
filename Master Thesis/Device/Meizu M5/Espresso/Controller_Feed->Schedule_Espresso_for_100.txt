@@ -1,0 +1,235 @@
+File - unknown
+
+1 06-15 05:47:37.466 24436-24468/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.564742144306584 250ms
+2 06-15 05:49:52.656 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.5524227698797459 252ms
+3 06-15 05:49:55.111 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.26273787568459295 191ms
+4 06-15 05:49:57.019 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9592903266299213 293ms
+5 06-15 05:49:58.945 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.014117665892086517 212ms
+6 06-15 05:50:00.784 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8724706246538128 201ms
+7 06-15 05:50:02.640 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.378187253813713 205ms
+8 06-15 05:50:04.489 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.5917986463067927 205ms
+9 06-15 05:50:06.409 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.004302700793846537 228ms
+10 06-15 05:50:08.273 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.2788082412748373 199ms
+11 06-15 05:50:10.258 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.3910161773758105 320ms
+12 06-15 05:50:12.150 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.08302866557320232 209ms
+13 06-15 05:50:13.996 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.04868587332719099 213ms
+14 06-15 05:50:15.857 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8965115449498912 205ms
+15 06-15 05:50:17.696 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.7767981771263122 204ms
+16 06-15 05:50:19.611 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.839339493579439 207ms
+17 06-15 05:50:21.486 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric Page 1 of 7
+
+File - unknown
+
+17 BETWEEN_SCREEN:Feed_Schedule:0.8991566322378227 204ms
+18 06-15 05:50:23.410 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8294046800771248 201ms
+19 06-15 05:50:25.302 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.19632087301879808 215ms
+20 06-15 05:50:27.211 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.5739566995387946 220ms
+21 06-15 05:50:29.113 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.5805151664866156 220ms
+22 06-15 05:50:30.991 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8123816232211324 213ms
+23 06-15 05:50:32.929 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6848009790477252 214ms
+24 06-15 05:50:34.799 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.761458112905873 206ms
+25 06-15 05:50:36.699 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6311310685657204 217ms
+26 06-15 05:50:38.593 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.44738824842699787 203ms
+27 06-15 05:50:40.514 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.43085663021846354 205ms
+28 06-15 05:50:42.474 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.04403869499013924 291ms
+29 06-15 05:50:44.452 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.1205996990339 242ms
+30 06-15 05:50:46.360 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9242497965815314 218ms
+31 06-15 05:50:48.226 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6947663788691509 203ms
+32 06-15 05:50:50.247 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9303447515168356 313ms
+33 06-15 05:50:52.212 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.7463674194929306 210ms
+34 06-15 05:50:54.124 24742-24777/com.google.samples.apps.
+Page 2 of 7
+
+File - unknown
+
+34 iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.30004308139302227 210ms
+35 06-15 05:50:56.091 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.03761567201303406 282ms
+36 06-15 05:50:58.037 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.7731748359095673 203ms
+37 06-15 05:51:00.005 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.7927427247351773 220ms
+38 06-15 05:51:01.926 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.04059693540935583 230ms
+39 06-15 05:51:03.876 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6237512767200246 216ms
+40 06-15 05:51:05.761 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8766028438863418 216ms
+41 06-15 05:51:07.744 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.685904992505966 294ms
+42 06-15 05:51:09.711 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8763359826630989 223ms
+43 06-15 05:51:11.748 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9185346937246565 311ms
+44 06-15 05:51:13.915 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6660865908221427 216ms
+45 06-15 05:51:15.803 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.29746862934171725 211ms
+46 06-15 05:51:17.817 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.09206608175323794 288ms
+47 06-15 05:51:19.883 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6317058089346205 288ms
+48 06-15 05:51:21.962 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.1568826985443783 307ms
+49 06-15 05:51:24.005 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.03685493244066995 277ms
+50 06-15 05:51:25.987 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.15643314982473855 218ms
+Page 3 of 7
+
+File - unknown
+
+51 06-15 05:51:27.931 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.25373835515674137 223ms
+52 06-15 05:51:29.897 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.4765970153798401 286ms
+53 06-15 05:51:31.970 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.12916987152040316 310ms
+54 06-15 05:51:34.002 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.10166867644266986 288ms
+55 06-15 05:51:35.979 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9983890431440238 208ms
+56 06-15 05:51:37.942 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9369568916947788 289ms
+57 06-15 05:51:40.007 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.3004810157433545 284ms
+58 06-15 05:51:42.049 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.2878694626198598 282ms
+59 06-15 05:51:44.091 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.39921284452727335 274ms
+60 06-15 05:51:46.175 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.10789993625841687 341ms
+61 06-15 05:51:48.166 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.3863323599550067 218ms
+62 06-15 05:51:50.080 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.12844059492671744 218ms
+63 06-15 05:51:52.000 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.21113648351979308 197ms
+64 06-15 05:51:53.923 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.523831598375348 225ms
+65 06-15 05:51:55.931 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.14203075389457331 280ms
+66 06-15 05:51:57.941 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.014464558391922733 237ms
+67 06-15 05:51:59.874 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric Page 4 of 7
+
+File - unknown
+
+67 BETWEEN_SCREEN:Feed_Schedule:0.640253461287434 220ms
+68 06-15 05:52:01.857 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.047411548612122933 245ms
+69 06-15 05:52:03.895 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.7646834084140285 289ms
+70 06-15 05:52:05.970 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.055641532467996746 296ms
+71 06-15 05:52:07.961 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.2658234841929151 196ms
+72 06-15 05:52:09.939 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.5304870227389893 294ms
+73 06-15 05:52:12.110 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.3371608751481344 339ms
+74 06-15 05:52:14.131 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.3540790285988312 287ms
+75 06-15 05:52:16.212 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.32802981107230755 281ms
+76 06-15 05:52:18.187 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.24479839519035373 224ms
+77 06-15 05:52:20.171 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.5731055947422937 297ms
+78 06-15 05:52:22.188 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.3445916704744394 223ms
+79 06-15 05:52:24.089 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.33336828516675765 220ms
+80 06-15 05:52:26.082 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6068411805446509 277ms
+81 06-15 05:52:28.189 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8798007806260899 300ms
+82 06-15 05:52:30.185 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.27130492335651457 221ms
+83 06-15 05:52:32.121 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.1766123587673395 220ms
+84 06-15 05:52:34.087 24742-24777/com.google.samples.apps.
+Page 5 of 7
+
+File - unknown
+
+84 iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.99177520720732 223ms
+85 06-15 05:52:36.090 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8621607028249713 299ms
+86 06-15 05:52:38.083 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.1252392167499521 232ms
+87 06-15 05:52:40.097 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.19411813544827505 298ms
+88 06-15 05:52:42.158 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9205304860094887 279ms
+89 06-15 05:52:44.218 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.9662976490415347 290ms
+90 06-15 05:52:46.209 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.341183860633717 231ms
+91 06-15 05:52:48.131 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.7478044023238964 223ms
+92 06-15 05:52:50.075 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6122667017287133 230ms
+93 06-15 05:52:51.981 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.005067051129464817 219ms
+94 06-15 05:52:53.952 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.24455274399591742 234ms
+95 06-15 05:52:55.875 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.09246270200390627 223ms
+96 06-15 05:52:57.936 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8211009863291258 317ms
+97 06-15 05:52:59.975 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.8206871064649182 221ms
+98 06-15 05:53:02.072 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.6500469345134859 322ms
+99 06-15 05:53:04.053 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.40112263961289174 226ms
+100 06-15 05:53:06.036 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.021526748611215618 221ms
+Page 6 of 7
+
+File - unknown
+
+101 06-15 05:53:08.060 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.3209744241267485 284ms
+102 06-15 05:53:10.162 24742-24777/com.google.samples.apps.
+iosched I/FirebasePerformance: Logging TraceMetric BETWEEN_SCREEN:Feed_Schedule:0.14383189699290044 315ms
+103
+
+Page 7 of 7
+
+
