@@ -36,9 +36,11 @@ import com.google.samples.apps.iosched.shared.util.TimeUtils
 import com.google.samples.apps.iosched.shared.util.requireActivity
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
 import com.google.samples.apps.iosched.ui.MainNavigationController
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.setUpSnackbar
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.finishTraceForTest
 import com.google.samples.apps.iosched.widget.FadingSnackbar
 import javax.inject.Inject
 
@@ -81,6 +83,11 @@ class EventFragment : MainNavigationController() {
         })
 
         return binding.root
+    }
+
+    override fun onAttach(view: View) {
+        super.onAttach(view)
+        finishTraceForTest(TestType.Feed_Info)
     }
 }
 

@@ -34,6 +34,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
+import com.bluelinelabs.conductor.ControllerChangeHandler
+import com.bluelinelabs.conductor.ControllerChangeType
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.R.style
 import com.google.samples.apps.iosched.databinding.FragmentSessionDetailBinding
@@ -54,6 +56,8 @@ import com.google.samples.apps.iosched.shared.util.toEpochMilli
 import com.google.samples.apps.iosched.shared.util.viewModelProvider
 import com.google.samples.apps.iosched.ui.MainActivity
 import com.google.samples.apps.iosched.ui.MainNavigationController
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.TestType
+import com.google.samples.apps.iosched.ui.MainActivity.Companion.getTraceNewInstance
 import com.google.samples.apps.iosched.ui.messages.SnackbarMessageManager
 import com.google.samples.apps.iosched.ui.prefs.SnackbarPreferenceViewModel
 import com.google.samples.apps.iosched.ui.reservation.RemoveReservationDialogFragment
@@ -69,6 +73,7 @@ import com.google.samples.apps.iosched.ui.signin.NotificationsPreferenceDialogFr
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment
 import com.google.samples.apps.iosched.ui.signin.SignInDialogFragment.Companion.DIALOG_SIGN_IN
 import com.google.samples.apps.iosched.util.doOnApplyWindowInsets
+import com.google.samples.apps.iosched.util.finishTraceForTest
 import com.google.samples.apps.iosched.util.findNavController
 import com.google.samples.apps.iosched.util.openWebsiteUrl
 import timber.log.Timber
@@ -275,6 +280,7 @@ class SessionDetailFragment(args: Bundle?) : MainNavigationController(args), Ses
             sessionDetailViewModel.setSessionId(sessionId)
         }
         //----
+        finishTraceForTest(TestType.Schedule_Details)
     }
 
     override fun onDetach(view: View) {

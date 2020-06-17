@@ -23,6 +23,7 @@ import androidx.activity.addCallback
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
@@ -37,6 +38,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.perf.FirebasePerformance
 import com.google.samples.apps.iosched.R
 import com.google.samples.apps.iosched.R.id
 import com.google.samples.apps.iosched.ar.ArActivity
@@ -66,6 +68,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import java.util.UUID
 import javax.inject.Inject
+import com.google.samples.apps.iosched.util.startTraceForTest
 
 class MainActivity : DaggerAppCompatActivity(), NavigationHost {
 
@@ -87,6 +90,11 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
             R.id.navigation_codelabs,
             R.id.navigation_settings
         )
+
+        //for conductor test
+        fun getTraceNewInstance(type: TestType) = FirebasePerformance.getInstance().newTrace("BETWEEN_SCREEN:$type:${Math.random()}")
+
+        enum class TestType { Schedule_Details, Feed_Schedule, Feed_Info, Activity_Feed, _Service }
     }
 
     @Inject
@@ -126,6 +134,12 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
     private var navHostFragment: ConductorNavHost? = null
 
     private lateinit var statusScrim: View
+    val traces = mutableMapOf(
+        TestType.Schedule_Details to getTraceNewInstance(TestType.Schedule_Details),
+        TestType.Feed_Info to getTraceNewInstance(TestType.Feed_Info),
+        TestType.Feed_Schedule to getTraceNewInstance(TestType.Feed_Schedule),
+        TestType.Activity_Feed to getTraceNewInstance(TestType.Activity_Feed)
+    )
 
     private var currentNavId = NAV_ID_NONE
 
@@ -133,8 +147,22 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
     private var pinnedSessionsJson: String? = null
     private var canSignedInUserDemoAr: Boolean = false
 
+    // The Idling Resource which will be null in production.
+    @VisibleForTesting
+    val idlingResources: Map<TestType, SimpleIdlingResource> by lazy {
+        mapOf(
+            TestType.Schedule_Details to SimpleIdlingResource(),
+            TestType.Feed_Info to SimpleIdlingResource(),
+            TestType.Feed_Schedule to SimpleIdlingResource(),
+            TestType.Activity_Feed to SimpleIdlingResource(),
+            TestType._Service to SimpleIdlingResource()
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        PowerManager.isSustainedPerformanceModeSupported()
+//        Window.setSustainedPerformanceMode()
 
         viewModel = viewModelProvider(viewModelFactory)
         // Update for Dark Mode straight away
@@ -175,6 +203,8 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         navHeaderBinding = NavigationHeaderBinding.inflate(layoutInflater).apply {
             lifecycleOwner = this@MainActivity
         }
+
+        startTraceForTest(TestType.Activity_Feed)
         navHostFragment =
             ConductorNavHost(
                 this, findViewById(id.view_container), savedInstanceState)
@@ -191,6 +221,15 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         }
 
         navigation = findViewById(R.id.navigation)
+        navigation.menu.findItem(R.id.navigation_info).setOnMenuItemClickListener {
+            if(currentNavId == R.id.navigation_feed) startTraceForTest(TestType.Feed_Info)
+            false
+        }
+        navigation.menu.findItem(R.id.navigation_schedule).setOnMenuItemClickListener {
+            if(currentNavId == R.id.navigation_feed) startTraceForTest(TestType.Feed_Schedule)
+            false
+        }
+
         navigation.apply {
             // Add the #io19 decoration
             val menuView = findViewById<RecyclerView>(R.id.design_navigation_view)?.apply {
@@ -307,7 +346,9 @@ class MainActivity : DaggerAppCompatActivity(), NavigationHost {
         if (drawer.isDrawerOpen(navigation) && drawer.shouldCloseDrawerFromBackPress()) {
             closeDrawer()
         } else {
-            super.onBackPressed()
+//            if (navHostFragment == null || !navHostFragment!!.router.handleBack()) {
+                super.onBackPressed()
+//            }
         }
     }
 
